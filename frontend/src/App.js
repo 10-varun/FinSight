@@ -5,6 +5,7 @@ import axios from 'axios';
 function App() {
   const [company, setCompany] = useState('');
   const [articles, setArticles] = useState([]);
+  const [netCashFlow, setNetCashFlow] = useState('');
   const [error, setError] = useState('');
 
   const handleSearch = async () => {
@@ -16,6 +17,7 @@ function App() {
     try {
       const response = await axios.post('http://127.0.0.1:5000/api/news', { company });
       setArticles(response.data.articles);
+      setNetCashFlow(response.data.net_cash_flow);
       setError('');
     } catch (err) {
       console.error('Error fetching news:', err);
@@ -38,14 +40,19 @@ function App() {
       </header>
       <main className="main-content">
         {error && <p className="error">{error}</p>}
+        {netCashFlow && (
+          <section className="net-cash-flow">
+            <h3>Net Cash Flow:</h3>
+            <p>{netCashFlow}</p>
+          </section>
+        )}
         <section className="news-articles">
+          <h3>Latest News Articles:</h3>
           <ul>
             {articles.length > 0 ? (
               articles.map((article, index) => (
                 <li key={index}>
                   <strong>{article.Headline}</strong>
-                  <br />
-                  <span>{article.Timestamp}</span>
                 </li>
               ))
             ) : (
