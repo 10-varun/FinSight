@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';  
 import MainPage from './MainPage';
 import SearchResultsPage from './SearchResultsPage';
-import axios from 'axios'
+import axios from 'axios';
 
 function App() {
   const [company, setCompany] = useState('');
   const [articles, setArticles] = useState([]);
   const [netCashFlow, setNetCashFlow] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false); // Track loading state
   const [showResults, setShowResults] = useState(false);
 
   const handleSearch = async () => {
@@ -17,43 +19,55 @@ function App() {
       return;
     }
 
+    setIsLoading(true); // Set loading state to true when fetching data
+    setError(''); // Reset previous errors
+
     try {
       const response = await axios.post('http://127.0.0.1:5000/api/news', { company });
       setArticles(response.data.articles);
       setNetCashFlow(response.data.net_cash_flow);
       setShowResults(true);
-      setError('');
     } catch (err) {
       console.error('Error fetching news:', err);
       setError('Failed to fetch news. Please try again.');
+    } finally {
+      setIsLoading(false); // Set loading state to false when data is fetched
     }
   };
 
   return (
-    <div className="App">
-      <header className="header">
-        <h1>Stock News Analyzer</h1>
-        <div className='search-section'>
-        <input
-          type="text"
-          className="search-bar"
-          placeholder="Search for a company..."
-          value={company}
-          onChange={(e) => setCompany(e.target.value)}
-        />
-        <button className="search-btn" onClick={handleSearch}>Search</button>
-        </div>
-      </header>
-      {showResults ? (
-        <SearchResultsPage
-          articles={articles}
-          netCashFlow={netCashFlow}
-          error={error}
-        />
-      ) : (
-        <MainPage />
-      )}
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <MainPage
+                company={company}
+                setCompany={setCompany}
+                handleSearch={handleSearch}
+                showResults={showResults}
+                articles={articles}
+                netCashFlow={netCashFlow}
+                error={error}
+                isLoading={isLoading} // Pass loading state to MainPage
+              />
+            }
+          />
+          <Route
+            path="/search-results"
+            element={
+              <SearchResultsPage
+                articles={articles}
+                netCashFlow={netCashFlow}
+                error={error}
+                isLoading={isLoading} // Pass loading state to SearchResultsPage
+              />
+            }
+          />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
