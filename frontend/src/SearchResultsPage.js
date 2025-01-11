@@ -4,7 +4,7 @@ import Summary from './components/Summary';
 import Graphs from './components/Graphs';
 import Charts from './components/Charts';
 
-function SearchResultsPage({ articles, netCashFlow, error }) {
+function SearchResultsPage({ articles, netCashFlow, error, isLoading }) {
   const [activeSection, setActiveSection] = useState('summary');
 
   const renderActiveSection = () => {
@@ -22,12 +22,36 @@ function SearchResultsPage({ articles, netCashFlow, error }) {
   return (
     <main className="search-results-page">
       <nav className="results-nav">
-        <button onClick={() => setActiveSection('summary')} className={activeSection === 'summary' ? 'active' : ''}>Summary</button>
-        <button onClick={() => setActiveSection('graphs')} className={activeSection === 'graphs' ? 'active' : ''}>Graphs</button>
-        <button onClick={() => setActiveSection('charts')} className={activeSection === 'charts' ? 'active' : ''}>Charts</button>
+        <button
+          onClick={() => setActiveSection('summary')}
+          className={activeSection === 'summary' ? 'active' : ''}
+        >
+          Summary
+        </button>
+        <button
+          onClick={() => setActiveSection('graphs')}
+          className={activeSection === 'graphs' ? 'active' : ''}
+        >
+          Graphs
+        </button>
+        <button
+          onClick={() => setActiveSection('charts')}
+          className={activeSection === 'charts' ? 'active' : ''}
+        >
+          Charts
+        </button>
       </nav>
       <div className="results-section">
-        {renderActiveSection()}
+        {isLoading ? (
+          <div className="loading-indicator">
+            <div className="spinner"></div>
+            <p>Loading...</p>
+          </div>
+        ) : articles.length > 0 || netCashFlow ? (
+          renderActiveSection()
+        ) : (
+          <p>No data available</p>
+        )}
       </div>
     </main>
   );

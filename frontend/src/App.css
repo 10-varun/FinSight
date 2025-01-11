@@ -9,34 +9,3 @@
   display: flex;
 }
 
-.search-section{
-  height: 100%;
-  width: 50%;
-  margin-top: 2.5%;
-  margin-left: 10%;
-  align-items: right;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.search-bar {
-  padding: 10px;
-  margin-right: 10px;
-  margin-left: 10%;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  height: 3%;
-  width: 50%;
-}
-.search-btn {
-  padding: 5px 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  width: 10%;
-}
-.search-btn:hover {
-  background-color: #0056b3;
-}

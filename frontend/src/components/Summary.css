@@ -2,6 +2,7 @@
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    background-color: (213, 209, 214)
   }
   .news-summary ul {
     list-style-type: none;
