@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import './App.css';
-import axios from 'axios';
+import MainPage from './MainPage';
+import SearchResultsPage from './SearchResultsPage';
+import axios from 'axios'
 
 function App() {
   const [company, setCompany] = useState('');
   const [articles, setArticles] = useState([]);
   const [netCashFlow, setNetCashFlow] = useState('');
   const [error, setError] = useState('');
+  const [showResults, setShowResults] = useState(false);
 
   const handleSearch = async () => {
     if (!company) {
@@ -18,6 +21,7 @@ function App() {
       const response = await axios.post('http://127.0.0.1:5000/api/news', { company });
       setArticles(response.data.articles);
       setNetCashFlow(response.data.net_cash_flow);
+      setShowResults(true);
       setError('');
     } catch (err) {
       console.error('Error fetching news:', err);
@@ -29,6 +33,7 @@ function App() {
     <div className="App">
       <header className="header">
         <h1>Stock News Analyzer</h1>
+        <div className='search-section'>
         <input
           type="text"
           className="search-bar"
@@ -37,30 +42,17 @@ function App() {
           onChange={(e) => setCompany(e.target.value)}
         />
         <button className="search-btn" onClick={handleSearch}>Search</button>
+        </div>
       </header>
-      <main className="main-content">
-        {error && <p className="error">{error}</p>}
-        {netCashFlow && (
-          <section className="net-cash-flow">
-            <h3>Net Cash Flow:</h3>
-            <p>{netCashFlow}</p>
-          </section>
-        )}
-        <section className="news-articles">
-          <h3>Latest News Articles:</h3>
-          <ul>
-            {articles.length > 0 ? (
-              articles.map((article, index) => (
-                <li key={index}>
-                  <strong>{article.Headline}</strong>
-                </li>
-              ))
-            ) : (
-              <li>No articles found.</li>
-            )}
-          </ul>
-        </section>
-      </main>
+      {showResults ? (
+        <SearchResultsPage
+          articles={articles}
+          netCashFlow={netCashFlow}
+          error={error}
+        />
+      ) : (
+        <MainPage />
+      )}
     </div>
   );
 }
