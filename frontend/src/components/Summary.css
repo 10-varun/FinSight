@@ -1,0 +1,12 @@
+.summary {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  .news-summary ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  .news-summary .article-item {
+    margin-bottom: 10px;
+  }

@@ -1,0 +1,29 @@
+.search-results-page {
+    padding: 20px;
+  }
+  .results-nav {
+    display: flex;
+    justify-content: left;
+    margin-bottom: 20px;
+  }
+  .results-nav button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    color: rgb(50, 48, 48);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: transparent;
+    font-weight: bold;
+    font-size: large;
+  }
+  .results-nav button.active {
+    color: #0e4d92;
+  }
+  .results-nav button:hover {
+    color: #220cee;
+  }
+  .results-section {
+    margin-top: 20px;
+  }
+  

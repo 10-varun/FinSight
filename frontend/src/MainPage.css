@@ -1,0 +1,28 @@
+.main-page {
+    padding: 20px;
+  }
+  .main-nav {
+    display: flex;
+    justify-content: left;
+    margin-bottom: 20px;
+  }
+  .main-nav button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    color: rgb(50, 48, 48);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: transparent;
+    font-weight: bold;
+    font-size: large;
+  }
+  .main-nav button.active {
+    color: #0e4d92;
+  }
+  .main-nav button:hover {
+    color: #220cee;
+  }
+  .active-section {
+    margin-top: 20px;
+  }
