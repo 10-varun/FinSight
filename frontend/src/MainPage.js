@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';  // Use useNavigate in v6
+import { useNavigate } from 'react-router-dom';  
 import './MainPage.css';
 import AboutUs from './components/AboutUs';
 import ContactUs from './components/ContactUs';
@@ -16,7 +16,7 @@ function MainPage({
   error
 }) {
   const [activeSection, setActiveSection] = useState('home');
-  const navigate = useNavigate();  // Initialize the useNavigate hook
+  const navigate = useNavigate();  
 
   const renderActiveSection = () => {
     switch (activeSection) {

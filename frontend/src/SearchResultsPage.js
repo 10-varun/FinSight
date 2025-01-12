@@ -4,7 +4,7 @@ import Summary from './components/Summary';
 import Graphs from './components/Graphs';
 import Charts from './components/Charts';
 
-function SearchResultsPage({ articles, netCashFlow, error, isLoading }) {
+function SearchResultsPage({ articleScores, averageScore, netCashFlow, error, isLoading }) {
   const [activeSection, setActiveSection] = useState('summary');
 
   const renderActiveSection = () => {
@@ -15,7 +15,14 @@ function SearchResultsPage({ articles, netCashFlow, error, isLoading }) {
         return <Charts />;
       case 'summary':
       default:
-        return <Summary articles={articles} netCashFlow={netCashFlow} error={error} />;
+        return (
+          <Summary
+            articleScores={articleScores}   
+            averageScore={averageScore}     
+            netCashFlow={netCashFlow}
+            error={error}
+          />
+        );
     }
   };
 
@@ -47,7 +54,7 @@ function SearchResultsPage({ articles, netCashFlow, error, isLoading }) {
             <div className="spinner"></div>
             <p>Loading...</p>
           </div>
-        ) : articles.length > 0 || netCashFlow ? (
+        ) : articleScores.length > 0 || netCashFlow ? (
           renderActiveSection()
         ) : (
           <p>No data available</p>
