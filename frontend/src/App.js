@@ -7,10 +7,11 @@ import axios from 'axios';
 
 function App() {
   const [company, setCompany] = useState('');
-  const [articles, setArticles] = useState([]);
+  const [articleScores, setArticleScores] = useState([]);  
+  const [averageScore, setAverageScore] = useState(null);  
   const [netCashFlow, setNetCashFlow] = useState('');
   const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false); // Track loading state
+  const [isLoading, setIsLoading] = useState(false);
   const [showResults, setShowResults] = useState(false);
 
   const handleSearch = async () => {
@@ -19,19 +20,20 @@ function App() {
       return;
     }
 
-    setIsLoading(true); // Set loading state to true when fetching data
-    setError(''); // Reset previous errors
+    setIsLoading(true);
+    setError('');
 
     try {
       const response = await axios.post('http://127.0.0.1:5000/api/news', { company });
-      setArticles(response.data.articles);
+      setArticleScores(response.data.article_scores);
+      setAverageScore(response.data.average_score);
       setNetCashFlow(response.data.net_cash_flow);
       setShowResults(true);
     } catch (err) {
       console.error('Error fetching news:', err);
-      setError('Failed to fetch news. Please try again.');
+      setError('Failed to fetch data. Please try again.');
     } finally {
-      setIsLoading(false); // Set loading state to false when data is fetched
+      setIsLoading(false);
     }
   };
 
@@ -47,10 +49,8 @@ function App() {
                 setCompany={setCompany}
                 handleSearch={handleSearch}
                 showResults={showResults}
-                articles={articles}
-                netCashFlow={netCashFlow}
                 error={error}
-                isLoading={isLoading} // Pass loading state to MainPage
+                isLoading={isLoading}
               />
             }
           />
@@ -58,10 +58,11 @@ function App() {
             path="/search-results"
             element={
               <SearchResultsPage
-                articles={articles}
+                articleScores={articleScores}  
+                averageScore={averageScore}    
                 netCashFlow={netCashFlow}
                 error={error}
-                isLoading={isLoading} // Pass loading state to SearchResultsPage
+                isLoading={isLoading}
               />
             }
           />

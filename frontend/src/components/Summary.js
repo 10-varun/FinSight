@@ -1,7 +1,7 @@
 import React from 'react';
 import './Summary.css';
 
-function Summary({ articles, netCashFlow, error }) {
+function Summary({ articleScores, netCashFlow, error }) {
   return (
     <section className="summary">
       {error && <p className="error">{error}</p>}
@@ -12,18 +12,23 @@ function Summary({ articles, netCashFlow, error }) {
         </div>
       )}
       <div className="news-summary">
-        <h3>Latest News Articles:</h3>
-        <ul>
-          {articles.length > 0 ? (
-            articles.map((article, index) => (
+        <h3>Article Sentiment Scores:</h3>
+        {articleScores.length > 0 ? (
+          <ul>
+            {articleScores.map((score, index) => (
               <li key={index} className="article-item">
-                <strong>{article.Headline}</strong>
+                <strong>{score.headline}</strong>
+                <p>Sentiment Score: {score.normalized_score}</p>
+                <p>Original Score: {score.original_score}</p>
               </li>
-            ))
-          ) : (
-            <li>No articles found.</li>
-          )}
-        </ul>
+            ))}
+          </ul>
+        ) : (
+          <p>No articles found.</p>
+        )}
+      </div>
+      <div className="average-score">
+        {/* <h3>Average Sentiment Score: {averageScore}</h3> */}
       </div>
     </section>
   );
