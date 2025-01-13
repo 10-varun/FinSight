@@ -1,85 +1,72 @@
-import joblib
-from sklearn.feature_extraction.text import TfidfVectorizer
-from nltk.tokenize import sent_tokenize
-import nltk
+import spacy
+import joblib  # To load the model and vectorizer you uploaded
+from news import fetch_and_return_articles  # Assuming fetch_and_return_articles is in the 'news.py' file
 
-# Load the pre-trained RandomForest model and TF-IDF vectorizer
-with open('model/regessorModel.joblib', 'rb') as f:
-    model_rf_final = joblib.load(f)
+# Load SpaCy's English model
+nlp = spacy.load("en_core_web_sm")
 
-with open('model/vectorize.joblib', 'rb') as f:
-    vectorizer = joblib.load(f)
-
-# Print the number of features in the loaded vectorizer
-print(f"Number of features in vectorizer: {len(vectorizer.get_feature_names_out())}")
+# Load the sentiment analysis model and vectorizer (Uploaded model and vectorizer)
+sentiment_model = joblib.load('model/Latest_Model.joblib')  # Replace with the correct path
+vectorizer = joblib.load('model/improved_tfidf_vectorizer.joblib')  # Replace with the correct path
 
 # Function to preprocess text (convert to lowercase)
 def preprocess_text(text):
-    processed_text = text.lower()  
-    return processed_text
+    return text.lower()
 
-# Function to normalize sentiment score to a scale of 1-10
-def normalize_sentiment_score(score, min_score, max_score):
-    return (score - min_score) / (max_score - min_score) * 9 + 1  
+# Function to normalize sentiment score to a scale of 0-10
+def normalize_sentiment_score(score, min_score=-0.3, max_score=0.45):
+    return (score - min_score) / (max_score - min_score) * 10  # Normalized score between 0 and 10
 
-# Function to summarize articles
-def summarize_articles(articles):
-    combined_text = " ".join(articles)  
-    sentences = sent_tokenize(combined_text)
-    summary = " ".join(sentences[:5])  # Use the first 5 sentences as a summary
-    return summary
+# Function to predict sentiment using the uploaded sentiment model
+def get_sentiment_score(text):
+    # Preprocess the text and transform using the vectorizer
+    vectorized_text = vectorizer.transform([text])
+    sentiment_score = sentiment_model.predict(vectorized_text)[0]  # This is your sentiment score
+    return sentiment_score
 
-# Function to process articles and generate sentiment analysis
+# Function to summarize articles together
+def summarize_articles_together(articles):
+    combined_text = " ".join(articles)
+    doc = nlp(combined_text)  # Tokenize sentences using SpaCy
+    sentences = [sent.text for sent in doc.sents]
+    return " ".join(sentences[:5])  # Take the first 5 sentences for a quick summary
+
+# Function to process articles and generate sentiment analysis and summary
 def process_articles(news_articles):
-    article_scores = []
     min_score = -0.3  # Adjust minimum sentiment score
     max_score = 0.45  # Adjust maximum sentiment score
 
-    # Extract headlines from news articles
-    headlines = [article['Headline'] for article in news_articles]
+    headlines = [article['Summary'] for article in news_articles]
 
-    # Process each headline
-    for article_text in headlines:
-        preprocessed_input = preprocess_text(article_text)
-        
-        # Transform input text using TF-IDF vectorizer
-        test_vectorized = vectorizer.transform([preprocessed_input])
-        test_vectorized_dense = test_vectorized.toarray()
+    # Create combined summary of all articles
+    combined_summary = summarize_articles_together(headlines)
 
-        # Check for feature mismatch
-        expected_features = len(vectorizer.get_feature_names_out())
-        if test_vectorized_dense.shape[1] != expected_features:
-            return {"error": f"Input has {test_vectorized_dense.shape[1]} features, but the model expects {expected_features} features."}
+    # Get sentiment score for each article and accumulate the score
+    sentiment_scores = [get_sentiment_score(headline) for headline in headlines]
+    total_sentiment_score = sum(sentiment_scores) / len(sentiment_scores) if sentiment_scores else 0
 
-        # Predict sentiment score
-        predicted_score = model_rf_final.predict(test_vectorized_dense)
+    # Normalize the sentiment score
+    normalized_score = normalize_sentiment_score(total_sentiment_score, min_score, max_score)
 
-        # Normalize the sentiment score
-        normalized_score = normalize_sentiment_score(predicted_score[0], min_score, max_score)
-
-        # Append result
-        article_scores.append((article_text, predicted_score[0], normalized_score))
-
-    # Calculate summary statistics
-    sum_of_scores = sum(score[2] for score in article_scores)
-    average_score = round(sum_of_scores / len(article_scores), 2) if article_scores else 0
-
-    # Generate article summary
-    articles_summary = summarize_articles(headlines)  
-
-    # Provide investment advice based on average score
-    if average_score >= 7:
+    # Provide investment advice based on normalized sentiment score
+    if normalized_score >= 7:
         investment_advice = "The company's outlook seems generally positive, with multiple growth prospects. It might be a good time to consider an investment."
-    elif average_score >= 4:
+    elif normalized_score >= 4:
         investment_advice = "The company's situation is a bit mixed with both challenges and opportunities. Investors may want to wait for more clarity before making any investment decisions."
     else:
         investment_advice = "The company's performance appears to be struggling with significant setbacks. It may be wise to hold off on investing for now."
 
     return {
-        "summary": articles_summary,
-        "article_scores": [{"headline": article, "original_score": original_score, "normalized_score": normalized_score}
-                           for article, original_score, normalized_score in article_scores],
-        "sum_of_scores": sum_of_scores,
-        "average_score": average_score,
+        "summary": combined_summary,
+        "overall_score": normalized_score,
         "investment_advice": investment_advice
     }
+
+# Fetch news articles from the backend and process them
+def get_company_sentiment(company_name):
+    news_articles = fetch_and_return_articles(company_name)  # This function fetches the articles
+
+    if not news_articles:
+        return {"error": "No articles found for this company."}
+
+    return process_articles(news_articles)

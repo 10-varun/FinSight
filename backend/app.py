@@ -1,31 +1,54 @@
-from flask import Flask, jsonify, request
-from flask_cors import CORS
-from utils.WebScraper import scrape_screener, scrape_news
-from scoring import process_articles  
+from flask import Flask, request, jsonify
+import logging
+from flask_cors import CORS  # Import CORS
+from news import fetch_and_return_articles
+from scoring import process_articles
 
 app = Flask(__name__)
-CORS(app)
+
+# Enable CORS for all routes
+CORS(app)  # This will allow all origins to access the API
+
+# Add logging
+logging.basicConfig(level=logging.DEBUG)
 
 @app.route('/api/news', methods=['POST'])
 def get_news():
-    data = request.get_json()
-    company = data.get('company')
+    try:
+        data = request.get_json()
+        company = data.get('company')
 
-    if not company:
-        return jsonify({'error': 'No company provided'}), 400
+        # Log incoming request
+        app.logger.debug(f"Received request with company: {company}")
 
-    news_articles = scrape_news(company)  
+        # Check if company is provided
+        if not company:
+            app.logger.error("Company name is missing")
+            return jsonify({'error': 'Company name is required'}), 400
+        
+        # Fetch news articles
+        app.logger.debug(f"Fetching data for company: {company}")
+        news_articles = fetch_and_return_articles(company)
 
-    result = process_articles(news_articles)
+        # Check if articles are found
+        if not news_articles:
+            app.logger.warning(f"No articles found for {company}")
+            return jsonify({'error': 'No news articles found for this company'}), 404
+        
+        # Process articles to analyze sentiment
+        result = process_articles(news_articles)
 
-    net_cash_flow = scrape_screener(company) 
+        # Send the result back as JSON
+        return jsonify({
+            'summary': result['summary'],
+            'overall_score': result['overall_score'],
+            'investment_advice': result['investment_advice']
+        })
 
-    return jsonify({
-        'article_scores': result['article_scores'],
-        'sum_of_scores': result['sum_of_scores'],
-        'average_score': result['average_score'],
-        'net_cash_flow': net_cash_flow
-    })
+    except Exception as e:
+        app.logger.exception("Error occurred while processing the request.")
+        return jsonify({'error': str(e)}), 500
+
 
 if __name__ == '__main__':
     app.run(debug=True)

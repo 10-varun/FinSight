@@ -1,35 +1,58 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Summary.css';
 
-function Summary({ articleScores, netCashFlow, error }) {
+function Summary({ summary, overallScore, investmentAdvice, error, isLoading }) {
+  const [fetchError, setFetchError] = useState(null); // Track fetch errors
+
+  useEffect(() => {
+    if (!summary) {
+      setFetchError('No summary available.');
+    }
+  }, [summary]);
+
   return (
     <section className="summary">
-      {error && <p className="error">{error}</p>}
-      {netCashFlow && (
-        <div className="net-cash-flow">
-          <h3>Net Cash Flow:</h3>
-          <p>{netCashFlow}</p>
+      {isLoading ? (
+        <div className="loading-indicator">
+          <div className="spinner"></div>
+          <p>Loading company data...</p>
         </div>
+      ) : error ? (
+        <p className="error">{error}</p>
+      ) : fetchError ? (
+        <p className="error">{fetchError}</p>
+      ) : (
+        <>
+          {/* Display Summary */}
+          {summary ? (
+            <div className="news-summary">
+              <h3>Summary of Articles:</h3>
+              <p>{summary}</p>
+            </div>
+          ) : (
+            <p>No summary available.</p>
+          )}
+
+          {/* Display Sentiment Score */}
+          {overallScore !== undefined ? (
+            <div className="overall-score">
+              <h3>Overall Sentiment Score: {overallScore}</h3>
+            </div>
+          ) : (
+            <p>No sentiment score available.</p>
+          )}
+
+          {/* Display Investment Advice */}
+          {investmentAdvice ? (
+            <div className="investment-advice">
+              <h3>Investment Advice:</h3>
+              <p>{investmentAdvice}</p>
+            </div>
+          ) : (
+            <p>No investment advice available.</p>
+          )}
+        </>
       )}
-      <div className="news-summary">
-        <h3>Article Sentiment Scores:</h3>
-        {articleScores.length > 0 ? (
-          <ul>
-            {articleScores.map((score, index) => (
-              <li key={index} className="article-item">
-                <strong>{score.headline}</strong>
-                <p>Sentiment Score: {score.normalized_score}</p>
-                <p>Original Score: {score.original_score}</p>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No articles found.</p>
-        )}
-      </div>
-      <div className="average-score">
-        {/* <h3>Average Sentiment Score: {averageScore}</h3> */}
-      </div>
     </section>
   );
 }
