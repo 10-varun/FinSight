@@ -6,8 +6,8 @@ from news import fetch_and_return_articles  # Assuming fetch_and_return_articles
 nlp = spacy.load("en_core_web_sm")
 
 # Load the sentiment analysis model and vectorizer (Uploaded model and vectorizer)
-sentiment_model = joblib.load('model/Latest_Model.joblib')  # Replace with the correct path
-vectorizer = joblib.load('model/improved_tfidf_vectorizer.joblib')  # Replace with the correct path
+sentiment_model = joblib.load('model/regessorModel.joblib')  # Replace with the correct path
+vectorizer = joblib.load('model/vectorize.joblib')  # Replace with the correct path
 
 # Function to preprocess text (convert to lowercase)
 def preprocess_text(text):
