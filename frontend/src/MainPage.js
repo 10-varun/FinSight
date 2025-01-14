@@ -27,7 +27,7 @@ function MainPage({
             setCompany={setCompany}
             handleSearch={() => {
               handleSearch();
-              navigate('/search-results'); 
+              navigate('/search-results', { state: { companyName: company } });  // Pass company name to SearchResultsPage
             }}
           />
         );

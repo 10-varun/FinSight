@@ -40,7 +40,7 @@ def scrape_screener(company):
         print("Error:", e)
 
     driver.quit()
-    return net_cash_flow
+    return net_cash_flow    
 
 # Scrape Economic Times
 def scrape_news(company):
