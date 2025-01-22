@@ -29,7 +29,7 @@ def summarize_articles_together(articles):
     combined_text = " ".join(articles)
     doc = nlp(combined_text)  # Tokenize sentences using SpaCy
     sentences = [sent.text for sent in doc.sents]
-    return " ".join(sentences[:5])  # Take the first 5 sentences for a quick summary
+    return " ".join(sentences[:19])  # Take the first 5 sentences for a quick summary
 
 # Function to process articles and generate sentiment analysis and summary
 def process_articles(news_articles):

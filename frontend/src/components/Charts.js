@@ -36,7 +36,7 @@ function Charts({ stockData }) {
 
   return (
     <div className="charts-container">
-      <h2>Stock Data Tables</h2>
+      <h2>Company Charts</h2>
       {Object.keys(stockData).length === 0 ? (
         <div>No stock data available.</div>
       ) : (

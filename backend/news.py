@@ -1,5 +1,6 @@
 import time
 import requests
+import re
 
 # Your provided API keys
 API_KEY = "AIzaSyAT5b9reyN-kcwH6Ogg69B0q-8uiWlhoa4"
@@ -18,7 +19,7 @@ def fetch_with_retry(url, timeout=10):
             return response.json()
         elif response.status_code == 429:  # Rate limit exceeded
             print(f"Rate limit reached. Retrying in 5 seconds.")
-            time.sleep(5)  # 5 seconds delay before retrying or switching
+            time.sleep(20)  # 5 seconds delay before retrying or switching
         else:
             print(f"Error fetching data: {response.status_code} - {response.text}")  # Log error and response
     except requests.exceptions.RequestException as e:
@@ -96,14 +97,31 @@ def fetch_and_return_articles(company_name, max_articles=20):
 
         if results:
             for item in results:
-                title = item.get('title', '')
-                snippet = item.get('description', '') if 'description' in item else item.get('snippet', '')
-                combined_text = f"{title} - {snippet}"
-                data.append({'Summary': combined_text})
+                # Attempt to fetch the full article if available
+                full_article = item.get('content', '')  # Check for 'content' field
+
+                if not full_article:  # If no full article, fallback to description/snippet
+                    full_article = item.get('description', '') if 'description' in item else item.get('snippet', '')
+
+                # Remove timestamp-like text (e.g., "5 hours ago", "3 days ago", etc.)
+                article_cleaned = re.sub(r'\d+\s*(days?|hours?)\s*ago', '', full_article)
+
+                # Append cleaned article to the list
+                data.append({'Summary': article_cleaned.strip()})
+
+                # Print the cleaned article content
+                print("\n--- Article Details ---")
+                print(f"Article Content: {article_cleaned.strip()}")
+                print("-----------------------")
 
                 total_entries += 1
                 if total_entries >= max_articles:
                     break
+
+        print("\n=== End Summary ===")
+        print(f"Total articles fetched: {len(data)}")
+        for i, article in enumerate(data, 1):
+            print(f"{i}. {article['Summary']}")
 
         start_index += 10
 
