@@ -3,9 +3,9 @@ import requests
 import re
 
 # Your provided API keys
-API_KEY = "AIzaSyAT5b9reyN-kcwH6Ogg69B0q-8uiWlhoa4"
-SEARCH_ENGINE_ID = "13decfb31dc63484a"
-NEWS_API_KEY = "c950bac4eee1498c99d316164d24e1c4"
+API_KEY = "AIzaSyDpvyEy-nl2xHTZR_o8BPw1JZFr4G55uLQ"
+SEARCH_ENGINE_ID = "c4676cd5f4a3f4b5a"
+NEWS_API_KEY = "a3b81112f1c94a31970a3af0bfba5137"
 FINHUB_API_KEY = "cts3hf1r01qh9oes7cng-finhub"
 
 # Function to fetch data with timeout and 5s delay before switching to next API
