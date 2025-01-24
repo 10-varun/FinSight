@@ -1,7 +1,7 @@
 # **FINSIGHT Documentation**
 
 ## **Introduction**
-FINSIGHT is an intelligent stock market insights platform designed to simplify the investment journey for beginners and seasoned investors. The platform centralizes essential stock market data, financial news, and personalized recommendations, providing users with actionable insights to make informed decisions.
+FINSIGHT is an intelligent stock market insights platform designed to simplify the investment journey for both beginners and seasoned investors. The platform centralizes essential stock market data, financial news, and personalized recommendations, providing users with actionable insights to make informed decisions.
 
 ---
 
@@ -13,9 +13,9 @@ To create a user-friendly application that integrates historical stock data, rea
 ### **Key Features**
 1. Centralized stock market data from trusted sources like NSE India and Economic Times.
 2. Sentiment analysis of financial news headlines for real-time market insights.
-3. Personalized investment recommendations based on historical data and trends.
+3. Personalized investment recommendations based on historical data, sentiment analysis, and trends.
 4. Portfolio management tools to track and analyze investment performance.
-5. Visual representation of stock trends and sentiment scores.
+5. Visual representation of stock trends, sentiment scores, and recommendation confidence.
 
 ---
 
@@ -33,6 +33,8 @@ To create a user-friendly application that integrates historical stock data, rea
 - **Sentiment Analysis Models**:
   - VADER for basic sentiment scoring.
   - FinBERT for financial context analysis.
+- **Summarization Model**:
+  - LaMini-Flan-T5-248M for generating concise and informative summaries of financial news.
 - **Trend Prediction**:
   - Machine Learning Models: LSTM, GRU for time-series predictions.
 - **Feature Integration**:
@@ -68,7 +70,7 @@ To create a user-friendly application that integrates historical stock data, rea
 - GitHub
 
 ### **Libraries and Tools**
-- SpaCy, SentenceTransformer, VADER, FinBERT, StandardScaler
+- SpaCy, SentenceTransformer, VADER, FinBERT, StandardScaler, LaMini-Flan-T5-248M
 
 ---
 
@@ -82,16 +84,19 @@ To create a user-friendly application that integrates historical stock data, rea
 - Processes headlines using sentiment analysis tools (VADER, FinBERT).
 - Categorizes sentiments into positive, neutral, and negative.
 
-### **3. Personalized Recommendations**
-- Analyzes historical trends and user preferences.
-- Suggests buy/sell actions with confidence scores.
+### **3. Summarization of Financial News**
+- Utilizes the LaMini-Flan-T5-248M model to generate concise and informative summaries of financial news articles, allowing users to quickly understand key points.
 
-### **4. Portfolio Management**
+### **4. Personalized Investment Recommendations**
+- Analyzes historical trends, market sentiment, and user preferences.
+- Suggests investment actions (e.g., invest, hold, avoid) with confidence scores based on sentiment analysis and market trends.
+
+### **5. Portfolio Management**
 - Tracks stock purchase price, current value, profit/loss, and percentage changes.
-
-### **5. Visualizations**
+  
+### **6. Visualizations**
 - Interactive graphs for stock trends.
-- Sentiment dashboards for a quick overview.
+- Sentiment dashboards for quick market sentiment overviews.
 
 ---
 
@@ -107,6 +112,7 @@ To create a user-friendly application that integrates historical stock data, rea
 
 ### **3. Model Training**
 - Train sentiment analysis models on labeled datasets.
+- Fine-tune LaMini-Flan-T5-248M for financial news summarization.
 - Fine-tune LSTM and GRU models for time-series predictions.
 
 ### **4. API Integration**
@@ -159,4 +165,3 @@ FINSIGHT is designed to simplify stock market investments by leveraging AI, adva
 This project is licensed under the MIT License. See the `LICENSE` file for details.
 
 For any questions or contributions, please visit the [GitHub repository](#).
-
