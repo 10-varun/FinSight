@@ -1,63 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './SearchResultsPage.css';
-import Summary from './components/Summary';  // Import the Summary component
+import Summary from './components/Summary';
 import Graphs from './components/Graphs';
 import Charts from './components/Charts';
 
-function SearchResultsPage({ 
-  summary, 
-  overallScore, 
-  investmentAdvice, 
-  error, 
-  isLoading, 
-  companyName
+function SearchResultsPage({
+  summary,
+  overallScore,
+  investmentAdvice,
+  error,
+  isLoading,
+  companyName, // Pass companyName from parent
 }) {
   const [activeSection, setActiveSection] = useState('summary');
-  const [stockData, setStockData] = useState(null);  // State to store stock data
-
-  const company = companyName || '';  // Retrieve company name from route state
+  const [stockData, setStockData] = useState(null);
 
   useEffect(() => {
-    if (activeSection === 'charts' && company) {
-      // Fetch stock data when 'charts' section is active
+    if (activeSection === 'charts' && companyName) {
       const fetchStockData = async () => {
         try {
-          const response = await axios.get(`http://127.0.0.1:5000/api/stock-data/${company}`);
-          if (response.data.error) {
-            setStockData({ error: response.data.error });
-          } else {
-            setStockData(response.data); // Set the stock data to state
-          }
-        } catch (err) {
-          setStockData({ error: "Error fetching stock data." });
+          const response = await axios.get(`http://127.0.0.1:5000/api/stock-data/${companyName}`);
+          setStockData(response.data);
+        } catch {
+          setStockData({ error: 'Error fetching stock data.' });
         }
       };
 
-      fetchStockData();  // Trigger the fetch
+      fetchStockData();
     }
-  }, [activeSection, company]);  // Re-fetch when section changes or company name updates
+  }, [activeSection, companyName]);
 
-  // Dynamically render the active section based on the navigation state
   const renderActiveSection = () => {
     switch (activeSection) {
       case 'graphs':
-        return <Graphs />;
+        return <Graphs companyName={companyName} />; // Pass companyName here
       case 'charts':
-        return <Charts stockData={stockData} />;  // Pass stock data to the Charts component
-      case 'summary':
+        return <Charts stockData={stockData} />;
       default:
-        return <Summary 
-          summary={summary}
-          overallScore={overallScore}
-          investmentAdvice={investmentAdvice}
-          error={error}
-          isLoading={isLoading}
-        />;
+        return (
+          <Summary
+            summary={summary}
+            overallScore={overallScore}
+            investmentAdvice={investmentAdvice}
+            error={error}
+            isLoading={isLoading}
+          />
+        );
     }
   };
 
-  // Dynamic section buttons
   const sections = ['summary', 'graphs', 'charts'];
 
   return (
@@ -73,10 +65,7 @@ function SearchResultsPage({
           </button>
         ))}
       </nav>
-
-      <div className="results-section">
-        {renderActiveSection()} 
-      </div>
+      <div className="results-section">{renderActiveSection()}</div>
     </main>
   );
 }

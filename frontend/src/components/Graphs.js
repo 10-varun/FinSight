@@ -10,22 +10,12 @@ import {
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 } from 'chart.js';
 
-// Register the necessary components
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-const Graph = () => {
-  const [ticker, setTicker] = useState('');
+const Graph = ({ companyName }) => {
   const [graphData, setGraphData] = useState(null);
   const [error, setError] = useState('');
 
@@ -37,7 +27,7 @@ const Graph = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ticker: ticker.toUpperCase() }), // Use ticker directly
+        body: JSON.stringify({ ticker: companyName.toUpperCase() }), // Use companyName prop here
       });
 
       const data = await response.json();
@@ -52,20 +42,14 @@ const Graph = () => {
       } else {
         setError(data.error || 'Error fetching ticker symbol.');
       }
-    } catch (err) {
+    } catch {
       setError('Failed to fetch data. Please try again.');
     }
   };
 
   return (
     <div className="graph-container">
-      
-      <input
-        type="text"
-        placeholder="Enter Stock Ticker"
-        value={ticker}
-        onChange={(e) => setTicker(e.target.value)}
-      />
+      <h2>Stock Predictions for {companyName}</h2>
       <button onClick={handlePredict}>Predict</button>
       {error && <div className="error">{error}</div>}
       {graphData && (
@@ -87,25 +71,21 @@ const Graph = () => {
               }}
               options={{
                 responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                  legend: { display: true, position: 'top' },
-                },
+                plugins: { legend: { display: true, position: 'top' } },
                 scales: {
                   x: {
+                    title: { display: true, text: 'Date' },
                     ticks: {
-                      callback: function (value) {
-                        const date = new Date(this.getLabelForValue(value));
-                        const day = date.getDate().toString().padStart(2, '0'); // Ensure two digits
-                        const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are 0-based
-                        const year = date.getFullYear();
-                        return `${day}/${month}/${year}`; // Format as DD/MM/YYYY
+                      callback: (value, index) => {
+                        const date = new Date(graphData.predicted_dates[index]);
+                        return date.toLocaleDateString('en-GB', {
+                          day: '2-digit',
+                          month: 'short',
+                        }); // Format: "25 Jan"
                       },
                     },
-                    title: { display: true, text: 'Date' },
                   },
                   y: {
-                    ticks: { callback: (value) => value },
                     title: { display: true, text: 'Price' },
                   },
                 },
@@ -130,22 +110,22 @@ const Graph = () => {
               }}
               options={{
                 responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                  legend: { display: true, position: 'top' },
-                },
+                plugins: { legend: { display: true, position: 'top' } },
                 scales: {
                   x: {
+                    title: { display: true, text: 'Date' },
                     ticks: {
-                      callback: function (value) {
-                        const date = new Date(this.getLabelForValue(value));
-                        return date.toLocaleDateString();
+                      callback: (value, index) => {
+                        const date = new Date(graphData.past_dates[index]);
+                        return date.toLocaleDateString('en-GB', {
+                          day: 'numeric',
+                          month: 'short',
+                          year: 'numeric',
+                        }); // Format: "2 Jan 2025"
                       },
                     },
-                    title: { display: true, text: 'Date' },
                   },
                   y: {
-                    ticks: { callback: (value) => value },
                     title: { display: true, text: 'Price' },
                   },
                 },
