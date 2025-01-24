@@ -3,14 +3,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* background-color: #4b4b76; */
   background-color: rgb(255, 255, 255);
 }
 
 .main-nav {
   display: flex;
   justify-content: center;
+  align-items: center;
+  width: 100%;
   margin-bottom: 20px;
+}
+
+.main-nav .logo {
+  position: absolute;
+  left: 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .main-nav button {
@@ -23,7 +31,6 @@
   background-color: transparent;
   font-weight: bold;
   font-size: large;
-  right: 0;
 }
 
 .main-nav button.active {
@@ -32,38 +39,4 @@
 
 .active-section {
   width: 100%;
-}
-
-.search-bar-nav {
-  padding: 12px;
-  width: 250px;
-  height: 100%;
-  margin-top: 1px;
-  border-radius: 25px;
-  border: 1px solid #363535;
-  font-size: 16px;
-  background-color: rgba(255, 255, 255, 0.8); 
-  color: #000; 
-}
-
-.search-bar-nav::placeholder {
-  color: #666; 
-}
-
-.search-btn-nav button {
-  padding: 10px 10px;
-  background-color: #000000;
-  color: rgb(255, 255, 255);
-  border: none;
-  border-radius: 25px;
-  height: 100%;
-  cursor: pointer;
-  font-size: 16px;
-  margin-left: 5px;
-}
-
-.search-btn-nav button:hover{
-  background-color: #5f5f5f;
-  color: rgb(255, 255, 255);
-  border: solid 0.5px rgb(92, 90, 90);
 }

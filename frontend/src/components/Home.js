@@ -1,7 +1,7 @@
 import React from 'react';
 import './Home.css';
 
-function Home({ company, setCompany }) {
+function Home({ company, setCompany, handleSearch }) {
   return (
     <div className="home-container">
       <div className="home-div-left">
@@ -12,6 +12,16 @@ function Home({ company, setCompany }) {
           <h3>
             powered by <span className="ai-box">AI</span>
           </h3>
+          <div className="search-container">
+            <input
+              type="text"
+              className="search-bar-nav"
+              placeholder="Search for a company..."
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
+            />
+            <button onClick={handleSearch}>Search</button>
+          </div>
           <div className="stats-container">
             <div className="stats-box">
               <div className="large-number">1</div>
@@ -25,12 +35,8 @@ function Home({ company, setCompany }) {
         </div>
       </div>
       <div className="home-div-right">
-        <div className="home-div-right-up">
-          {/* image rightupper */}
-        </div>
-        <div className="home-div-right-down">
-          {/* image rightlower */}
-        </div>
+        <div className="home-div-right-up"></div>
+        <div className="home-div-right-down"></div>
       </div>
     </div>
   );

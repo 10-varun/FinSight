@@ -47,41 +47,32 @@ function MainPage({
   return (
     <main className="main-page">
       <nav className="main-nav">
-        <button
-          onClick={() => setActiveSection('home')}
-          className={activeSection === 'home' ? 'active' : ''}
-        >
-          Home
-        </button>
-        <button
-          onClick={() => setActiveSection('about-product')}
-          className={activeSection === 'about-product' ? 'active' : ''}
-        >
-          Product
-        </button>
-        <button
-          onClick={() => setActiveSection('about-us')}
-          className={activeSection === 'about-us' ? 'active' : ''}
-        >
-          About Us
-        </button>
-        <button
-          onClick={() => setActiveSection('contact-us')}
-          className={activeSection === 'contact-us' ? 'active' : ''}
-        >
-          Contact Us
-        </button>
-        <input
-          type="text"
-          className="search-bar-nav"
-          placeholder="Search for a company..."
-          value={company}
-          onChange={(e) => setCompany(e.target.value)}
-        />
-        <div className="search-btn-nav">
-        <button onClick={handleSearchAndNavigate}>
-          Search
-        </button>
+        <div className="logo">Logo</div>
+        <div>
+          <button
+            onClick={() => setActiveSection('home')}
+            className={activeSection === 'home' ? 'active' : ''}
+          >
+            Home
+          </button>
+          <button
+            onClick={() => setActiveSection('about-product')}
+            className={activeSection === 'about-product' ? 'active' : ''}
+          >
+            Product
+          </button>
+          <button
+            onClick={() => setActiveSection('about-us')}
+            className={activeSection === 'about-us' ? 'active' : ''}
+          >
+            About Us
+          </button>
+          <button
+            onClick={() => setActiveSection('contact-us')}
+            className={activeSection === 'contact-us' ? 'active' : ''}
+          >
+            Contact Us
+          </button>
         </div>
       </nav>
 
