@@ -77,7 +77,7 @@ def summarize_articles_together(articles):
     inputs = tokenizer(combined_text, return_tensors="pt", max_length=1024, truncation=True)
 
     try:
-        summary_ids = model.generate(inputs["input_ids"], max_length=130, min_length=80, length_penalty=2.0, num_beams=4, early_stopping=True)
+        summary_ids = model.generate(inputs["input_ids"], max_length=140, min_length=120, length_penalty=2.0, num_beams=4, early_stopping=True)
         summary = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
         return summary
     except Exception as e:
@@ -100,11 +100,29 @@ def process_articles(news_articles):
     normalized_score = Decimal(normalized_score).quantize(Decimal('0.00'), rounding=ROUND_DOWN)
     
     if normalized_score >= 7:
-        investment_advice = "Strong positive sentiment. Potential investment opportunity, subject to further analysis."
+        investment_advice = """
+        Strong positive sentiment. The stock shows a promising outlook, with favorable news 
+        and market trends. It suggests strong growth potential in the short and long term. 
+        However, while this might be a good investment opportunity, it is important to conduct 
+        additional due diligence, analyze company fundamentals, and assess any potential risks 
+        before making a final investment decision.
+    """
     elif normalized_score >= 4:
-        investment_advice = "Moderate sentiment. Conduct in-depth research and risk assessment before investing."
+        investment_advice = """
+        Moderate sentiment. While the stock shows some potential, there are mixed signals in the 
+        market. This could indicate both opportunities and risks. It is advisable to conduct in-depth 
+        research, analyze the company’s recent performance, review industry trends, and assess broader 
+        economic conditions. A thorough risk assessment and possibly waiting for more clarity before 
+        making a decision is recommended.
+    """
     else:
-        investment_advice = "Weak sentiment. Consider avoiding or reassessing investment strategy."
+        investment_advice = """
+        Weak sentiment. The company or stock is facing significant challenges, reflected in negative 
+        news or market performance. There may be concerns about financial health, market conditions, 
+        or management decisions. It’s advisable to be cautious and consider avoiding this investment 
+        or reassessing your strategy. If you're already invested, it might be a good idea to review the 
+        situation and decide whether to cut losses or wait for improvement.
+    """
 
     
     return {

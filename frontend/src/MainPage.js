@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';  
+import { useNavigate } from 'react-router-dom';
 import './MainPage.css';
 import AboutUs from './components/AboutUs';
 import ContactUs from './components/ContactUs';
@@ -16,7 +16,12 @@ function MainPage({
   error
 }) {
   const [activeSection, setActiveSection] = useState('home');
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
+
+  const handleSearchAndNavigate = () => {
+    handleSearch();
+    navigate('/search-results', { state: { companyName: company } });
+  };
 
   const renderActiveSection = () => {
     switch (activeSection) {
@@ -25,10 +30,7 @@ function MainPage({
           <Home
             company={company}
             setCompany={setCompany}
-            handleSearch={() => {
-              handleSearch();
-              navigate('/search-results', { state: { companyName: company } });  // Pass company name to SearchResultsPage
-            }}
+            handleSearch={handleSearchAndNavigate}
           />
         );
       case 'about-us':
@@ -69,6 +71,18 @@ function MainPage({
         >
           Contact Us
         </button>
+        <input
+          type="text"
+          className="search-bar-nav"
+          placeholder="Search for a company..."
+          value={company}
+          onChange={(e) => setCompany(e.target.value)}
+        />
+        <div className="search-btn-nav">
+        <button onClick={handleSearchAndNavigate}>
+          Search
+        </button>
+        </div>
       </nav>
 
       <div className="active-section">{renderActiveSection()}</div>

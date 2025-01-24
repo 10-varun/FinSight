@@ -4,64 +4,66 @@
   margin: 0 auto; /* Center the graph horizontally */
 }
 
-
-s
 .graphs {
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: rgb(213, 209, 214);
-  }
+  padding: 20px;
+  border: 1px solid #e0e0e0; /* Softer border */
+  border-radius: 5px;
+  background-color: #f5f5f5; /* Light gray background */
+}
 
-  .graph-container {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .input-container {
-    margin-bottom: 20px;
-  }
-  
-  input[type="text"] {
-    width: 300px;
-    padding: 10px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  button {
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  .result-container {
-    margin-top: 20px;
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .chart ul {
-    padding: 0;
-    list-style-type: none;
-  }
-  
-  .chart li {
-    padding: 5px 0;
-    font-size: 14px;
-  }
-  
-  .error {
-    color: red;
-    font-weight: bold;
-  }
-  
+.graph-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #333; /* Dark gray for text */
+}
+
+.graph-container .input-container {
+  margin-bottom: 20px;
+}
+
+.graph-container input[type="text"] {
+  width: 300px;
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff; /* White background for inputs */
+  color: #333; /* Dark text for better readability */
+}
+
+.graph-container button {
+  padding: 10px 15px;
+  background-color: #000; /* Black for buttons */
+  color: #fff; /* White text for contrast */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.graph-container button:hover {
+  background-color: #444; /* Slightly lighter black on hover */
+}
+
+.graph-container .result-container {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #e0e0e0; /* Match the lighter border style */
+  border-radius: 4px;
+  background-color: #fff; /* Clean white background */
+}
+
+.graph-container .chart ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+.graph-container .chart li {
+  padding: 5px 0;
+  font-size: 14px;
+  color: #555; /* Medium gray for secondary text */
+}
+
+.graph-container .error {
+  color: #d9534f; /* Red for error messages */
+  font-weight: bold;
+}

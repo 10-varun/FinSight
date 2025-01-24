@@ -1,14 +1,202 @@
+/* ----- Main Page Styling ----- */
+.main-page {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f9f9f9; /* Very light gray for the background */
+  font-family: 'Roboto', sans-serif; /* Clean and modern font */
+  color: #333; /* Default dark text for good readability */
+  min-height: 100vh;
+}
+
+/* ----- Navigation Buttons ----- */
+.main-nav {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.main-nav button {
+  margin: 0 15px;
+  padding: 12px 25px;
+  color: #222; /* Darker text for contrast */
+  border: 2px solid #00a3ff; /* Cyan border */
+  border-radius: 50px;
+  background-color: transparent;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.main-nav button.active {
+  color: #fff; /* White text when active */
+  background-color: #00a3ff; /* Cyan background when active */
+}
+
+.main-nav button:hover {
+  background-color: rgba(0, 163, 255, 0.1); /* Light cyan on hover */
+  border-color: #00a3ff; /* Keep border cyan on hover */
+}
+
+/* ----- Search Bar Styling ----- */
+.search-bar-nav {
+  padding: 12px;
+  width: 280px;
+  border-radius: 30px;
+  border: 1px solid #ddd; /* Light gray border */
+  font-size: 16px;
+  background-color: #fff; /* White background */
+  color: #333; /* Dark text for readability */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Light shadow */
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.search-bar-nav::placeholder {
+  color: #bbb; /* Light gray placeholder text */
+}
+
+.search-bar-nav:focus {
+  outline: none;
+  box-shadow: 0 2px 12px rgba(0, 163, 255, 0.4); /* Highlight focus with cyan */
+}
+
+/* ----- Search Button ----- */
+.search-btn-nav button {
+  padding: 12px 20px;
+  background-color: #222; /* Dark button background */
+  color: #fff; /* White text */
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease-in-out;
+}
+
+.search-btn-nav button:hover {
+  background-color: #333; /* Darker button on hover */
+}
+
+/* ----- Summary Card - Sleek Minimalist Look ----- */
 .summary {
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: (213, 209, 214);
-    font-size: larger;    
+  padding: 20px;
+  border-radius: 15px;
+  background: #ffffff; /* White background */
+  border: 1px solid #ddd; /* Light gray border */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  font-size: 1.2rem;
+  color: #333; /* Dark text for better readability */
+  width: 95%;
+  max-width: 1000px;
+  text-align: left;
+  margin: 20px auto;
+  transition: all 0.3s ease-in-out;
+}
+
+.summary:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow on hover */
+}
+
+/* ----- News Summary List ----- */
+.news-summary ul {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+}
+
+.news-summary .article-item {
+  padding: 15px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  background: #ffffff; /* White background for articles */
+  border: 1px solid #f1f1f1; /* Soft border color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.news-summary .article-item:hover {
+  background-color: #f9f9f9; /* Light gray on hover */
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow */
+  transform: scale(1.02);
+}
+
+/* ----- Headline Text - Clean and Modern ----- */
+.news-summary .article-item h3 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #00a3ff; /* Cyan color for headlines */
+  margin: 0 0 5px 0;
+}
+
+/* Article Content */
+.news-summary .article-item p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  color: #333; /* Dark text for article content */
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* ----- Loading Bar - Simplified Design ----- */
+/* ----- Loading Bar - Simplified Design ----- */
+.loading-bar {
+  width: 90%; /* Increased width for a larger loading bar */
+  max-width: 800px; /* Adjusted max width */
+  padding: 20px; /* Increased padding for more height */
+  text-align: center;
+  font-size: 1.4rem; /* Increased font size for better readability */
+  font-weight: 600; /* Increased font weight */
+  color: #333; /* Dark text */
+  background: #fff; /* White background */
+  border-radius: 15px;
+  border: 1px solid #ddd; /* Light gray border */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Light shadow */
+  transition: none; /* Removed transition */
+}
+
+/* Removed Hover Effect */
+.loading-bar:hover {
+  /* No hover effect to keep it still */
+  box-shadow: none;
+  transform: none;
+}
+
+
+/* ----- Futuristic Loading Animation ----- */
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.loader span {
+  width: 12px;
+  height: 12px;
+  margin: 0 5px;
+  background: #00a3ff; /* Cyan dots */
+  border-radius: 50%;
+  animation: loading 1.5s infinite ease-in-out;
+}
+
+/* Different Animation Delay for Each Dot */
+.loader span:nth-child(1) { animation-delay: 0s; }
+.loader span:nth-child(2) { animation-delay: 0.2s; }
+.loader span:nth-child(3) { animation-delay: 0.4s; }
+.loader span:nth-child(4) { animation-delay: 0.6s; }
+
+@keyframes loading {
+  0%, 100% {
+      transform: scale(1);
+      opacity: 1;
   }
-  .news-summary ul {
-    list-style-type: none;
-    padding: 0;
+  50% {
+      transform: scale(1.5);
+      opacity: 0.3;
   }
-  .news-summary .article-item {
-    margin-bottom: 10px;
-  }
+}

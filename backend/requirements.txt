@@ -6,3 +6,11 @@ joblib
 newsapi-python
 google-api-python-client
 finnhub-python
+torch
+transformers
+fastapi
+tenacity
+selenium
+webdriver_manager
+yfinance
+tensorflow

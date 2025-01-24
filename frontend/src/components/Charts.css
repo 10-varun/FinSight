@@ -1,5 +1,4 @@
-/* Charts.css */
-
+/* ----- Charts Container ----- */
 .charts-container {
   padding: 20px;
   max-width: 1200px;
@@ -7,61 +6,86 @@
   font-family: Arial, sans-serif;
 }
 
+/* ----- Heading Styling ----- */
 h2 {
   text-align: center;
   margin-bottom: 30px;
   color: #333;
+  font-size: 2em;
+  font-weight: bold;
+  letter-spacing: 1px;
 }
 
+/* ----- Table Container Styling ----- */
 .table-container {
   margin-bottom: 30px;
 }
 
+/* ----- Section Heading Styling ----- */
 h3 {
   color: #555;
   margin-bottom: 10px;
   font-size: 1.2em;
   text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
+/* ----- Stock Table Styling ----- */
 .stock-table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
+  font-size: 0.9em; /* Smaller font size for more compact table */
 }
 
+/* Table Header Styling */
 .stock-table th, .stock-table td {
   border: 1px solid #ddd;
-  padding: 8px 12px;
+  padding: 6px 10px; /* Smaller padding to reduce space */
   text-align: center;
+  word-wrap: break-word; /* Prevent overflow in cells */
 }
 
+/* Table Header Specific Styling */
 .stock-table th {
   background-color: #f4f4f4;
   color: #333;
   font-weight: bold;
 }
 
+/* Alternating Row Colors */
 .stock-table tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
+/* Hover Effect on Rows */
 .stock-table tr:hover {
   background-color: #f1f1f1;
 }
 
+/* ----- Error Message Styling ----- */
 .error-message {
   color: red;
   text-align: center;
   font-size: 1.2em;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
+/* ----- Media Queries for Responsiveness ----- */
 @media (max-width: 768px) {
   .stock-table th, .stock-table td {
-    padding: 6px 8px;
+    padding: 4px 8px; /* Even smaller padding for mobile view */
+    font-size: 0.8em; /* Reduce font size for mobile */
   }
-  
+
   h3 {
     font-size: 1em;
+  }
+
+  /* Make the table container scrollable on small screens */
+  .charts-container {
+    overflow-x: auto;
   }
 }
