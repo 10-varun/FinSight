@@ -1,5 +1,83 @@
+/* General Section Styling */
 .contact-us {
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  background-image: url('../images/mail.png'); /* Set background image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: 'Roboto', sans-serif;
+  width: 100vw; /* Ensure it covers the full width of the viewport */
+  height: 100vh; /* Ensure it covers the full height of the viewport */
+  overflow: hidden; /* Prevent scrolling inside this section only */
+  position: relative; /* Ensure it doesn’t impact other pages */
+  margin: 0;
+  padding: 0;
+}
+
+.contact-main {
+  border-radius: 15px;
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center the content vertically */
+  align-items: center; /* Center the content horizontally */
+  text-align: center;
+  max-width: 600px; /* Restrict the width of the content */
+  background: rgba(255, 252, 252, 0); /* Semi-transparent background for readability */
+}
+
+
+/* Heading and Description */
+h2 {
+  font-size: 2.5rem;
+  color: #1d1d1d;
+  margin-bottom: 20px;
+}
+
+.contact-description {
+  font-size: 1.2rem;
+  color: #3e3c3c;
+  margin-bottom: 30px;
+}
+
+/* Contact Details */
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-item h3 {
+  font-size: 1.5rem;
+  color: #333333;
+  margin-bottom: 10px;
+}
+
+.contact-link {
+  color: #0056b3;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.contact-link:hover {
+  text-decoration: underline;
+  color: #003580;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contact-main {
+    padding: 40px 20px;
   }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .contact-item h3 {
+    font-size: 1.3rem;
+  }
+
+  .contact-link {
+    font-size: 1rem;
+  }
+}

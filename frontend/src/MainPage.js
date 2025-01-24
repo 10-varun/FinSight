@@ -47,7 +47,7 @@ function MainPage({
   return (
     <main className="main-page">
       <nav className="main-nav">
-        <div className="logo">Logo</div>
+        <div className="logo"></div>
         <div>
           <button
             onClick={() => setActiveSection('home')}

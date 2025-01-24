@@ -1,5 +1,135 @@
 .about-us {
+  background-color: #f7f7f7;
+  padding: 60px 20px;
+}
+
+.about-us-container {
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+/* Shared styles for sections */
+.our-story,
+.our-mission,
+.core-values,
+.join-us-section {
+  background-color: #f7f7f7;
+  padding: 30px;
+  margin-bottom: 40px;
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.our-story:hover,
+.our-mission:hover,
+.core-values:hover,
+.join-us-section:hover {
+  transform: translateY(-5px);
+}
+
+/* Titles and Text */
+h2 {
+  font-size: 2rem;
+  color: #2f2f2f;
+  margin-bottom: 20px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+}
+
+p, ul {
+  font-size: 1.1rem;
+  color: #555555;
+  line-height: 1.7;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+li {
+  margin-bottom: 12px;
+}
+
+strong {
+  font-weight: 700;
+  color: #0056b3;
+}
+
+/* Flexbox for Text on Left and Image on Right */
+.combo1,
+.combo_2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  height: auto; /* Adjust based on content */
+  border-radius: 10px;
+  padding: 20px;
+  gap: 20px; /* Spacing between text and image */
+}
+
+.combo1 .our-story,
+.combo_2 .core-values {
+  flex: 1;
+}
+
+.image_1,
+.image_2 {
+  flex: 1;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  height: 40vh;
+}
+
+/* Specific Background Images */
+.image_1 {
+  background-image: url(../images/grow.png);
+}
+
+.image_2 {
+  background-image: url(../images/values.png); /* Update with actual image path */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .about-us-container {
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
   }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  p, li {
+    font-size: 1rem;
+  }
+
+  /* Stack image and text vertically for small screens */
+  .combo1,
+  .combo_2 {
+    flex-direction: column;
+  }
+
+  .image_1,
+  .image_2 {
+    flex: 1;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    height: 40vh;
+    opacity: 0.7; /* Adjust opacity value (0.0 to 1.0) */
+  }
+  
+  /* Optional: Add hover effect to restore full opacity */
+  .image_1:hover,
+  .image_2:hover {
+    opacity: 1; /* Full visibility on hover */
+    transition: opacity 0.3s ease;
+  }
+  
+}

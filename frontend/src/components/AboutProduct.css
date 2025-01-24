@@ -1,5 +1,124 @@
-.about-product {
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
+.product-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+  background-color: #f4f7fc; /* Light grayish-blue background */
+  height: 80vh;
+}
+
+.product-div-left {
+  border-radius: 10px;
+  margin: 10px;
+  background-color: #f4f7fc; /* Light grayish-blue background */
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  justify-content: space-between;
+  /* Subtle shadow for depth */
+}
+
+.product-top-content {
+  padding: 20px;
+  text-align: center;
+  height: 30vh;
+  background-color: #a1b1caed; /* Soft blue for a fresh and modern feel */
+  margin-bottom: 15px;
+  border-radius: 10px;
+  color: #ffffff; /* White text for contrast */
+}
+
+.product-top-content h1 {
+  font-size: 2.5rem;
+  color: #ffffff; /* Keep headers white */
+}
+
+.product-top-content p {
+  font-size: 1.1rem;
+  color: #ffffff; /* Slightly lighter blue for text */
+}
+
+.product-bottom-content {
+  margin-bottom: 15px;
+  justify-content: space-between;
+  background-color: #f4f7fc; /* White background for contrast */
+  background-image: url('../images/magnifying\ glass.png'); /* Optional background image */
+  background-size: cover;
+  background-position: center;
+  height: 40vh;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+}
+
+.product-div-right {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.product-div-right-up,
+.product-div-right-down {
+  background-color: #ffffff; /* White background for consistency */
+  border-radius: 10px;
+  margin-bottom: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08); /* Subtle shadow for depth */
+}
+
+.product-div-right-up {
+  background-color: #f8fafc; /* Very light blue for a clean and airy look */
+  height: 30vh;
+}
+
+.product-div-right-up h2 {
+  font-size: 2rem;
+  color: #1e3a8a; /* Deep blue for headings */
+}
+
+.product-div-right-up p {
+  font-size: 1rem;
+  color: #475569; /* Muted grayish-blue for readability */
+}
+
+.product-div-right-down {
+  background-color: #e3f2fd; /* Light grayish-white for subtle contrast */
+  height: 27vh;
+}
+
+.product-div-right-down h2 {
+  font-size: 2rem;
+  color: #1e3a8a; /* Matching deep blue for consistency */
+  margin-bottom: 10px;
+  margin-top: 0px;
+}
+
+.product-div-right-down ul {
+  list-style-type: none;
+  padding: 0;
+  font-size: 1.1rem;
+  color: #475569; /* Grayish-blue for professional readability */
+}
+
+.product-div-right-down li {
+  margin-bottom: 10px;
+  padding-left: 10px;
+  position: relative;
+}
+
+.product-div-right-down li:before {
+  content: '•'; /* Add bullet point */
+  color: #3b82f6; /* Blue bullet color for visual appeal */
+  font-size: 1.5rem;
+  position: absolute;
+  left: 0;
+  top: -2px;
+}
+
+.product-div-right-up,
+.product-div-right-down {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
