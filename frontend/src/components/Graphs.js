@@ -59,7 +59,7 @@ const Graph = () => {
 
   return (
     <div className="graph-container">
-      <h2>Graphs</h2>
+      
       <input
         type="text"
         placeholder="Enter Stock Ticker"

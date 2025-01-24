@@ -4,18 +4,34 @@ import datetime
 import numpy as np
 import tensorflow as tf
 from sklearn.preprocessing import MinMaxScaler
+from yahooquery import search
 
 # Load the trained model (you can adjust the path as needed)
 model = tf.keras.models.load_model('./model/my_model.h5')
 
-def predict_stock_prices(ticker):
+
+def predict_stock_prices(company_name):
     try:
+        # Use Yahoo Finance's search API
+        search_results = search(company_name)
+
+        # Extract the first valid ticker symbol
+        ticker = None
+        if 'quotes' in search_results and search_results['quotes']:
+            for result in search_results['quotes']:
+                if 'symbol' in result and 'shortname' in result:
+                    ticker = result['symbol']
+                    break
+
+        if not ticker:
+            raise ValueError(f"No ticker found for the given company name: {company_name}. Search results: {search_results}")
+
         # Fetch stock data from Yahoo Finance for the past year
         data = yf.Ticker(ticker)
         one_year_data = data.history(period='1y')
 
         if one_year_data.empty:
-            raise ValueError(f"No data found for ticker {ticker}")
+            raise ValueError(f"No data found for ticker {ticker}. Please check the ticker validity.")
 
         # Save the data to a CSV file (optional)
         one_year_data.to_csv(f'./data/{ticker}_stock.csv')
@@ -55,7 +71,7 @@ def predict_stock_prices(ticker):
 
         # Prepare the dates for prediction
         last_date = df['Date'].iloc[-1]
-        predicted_dates = [last_date + datetime.timedelta(days=i+1) for i in range(30)]
+        predicted_dates = [last_date + datetime.timedelta(days=i + 1) for i in range(30)]
 
         # Prepare the final DataFrame with predictions
         predicted_df = pd.DataFrame({
@@ -72,4 +88,6 @@ def predict_stock_prices(ticker):
         }
 
     except Exception as e:
+        # Log the error and raise a clear message
+        print(f"Error: {str(e)}")
         raise ValueError(f"Error occurred while predicting stock prices: {str(e)}")
