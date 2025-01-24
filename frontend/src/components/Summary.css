@@ -1,121 +1,182 @@
-/* ----- Summary Card - Sleek Minimalist Look ----- */
-.summary {
+/* ----- Main Page Styling ----- */
+@import url('https://fonts.googleapis.com/css2?family=Simplifica&family=Raleway:wght@300;500&display=swap');
+
+/* ----- Summary Container ----- */
+.summary-container {
   padding: 20px;
   border-radius: 15px;
-  background: #ffffff; /* White background */
-  border: 1px solid #ddd; /* Light gray border */
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  background: #ffffff;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   font-size: 1.2rem;
-  color: #333; /* Dark text for better readability */
-  width: 95%;
-  max-width: 1000px;
+  color: #0a091b;
+  max-width: 95%; /* Adjusts to a smaller width for larger screens */
+  width: calc(100% - 40px); /* Ensures margin and padding work well on small screens */
   text-align: left;
-  margin: 20px auto;
+  margin: 40px auto;
   transition: all 0.3s ease-in-out;
+  overflow-wrap: break-word; /* Prevents content overflow */
 }
 
-.summary:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow on hover */
-}
-
-/* ----- News Summary List ----- */
-.news-summary ul {
-  list-style-type: none;
-  padding: 0;
-  width: 100%;
-}
-
-.news-summary .article-item {
-  padding: 15px;
-  margin-bottom: 12px;
-  border-radius: 10px;
-  background: #ffffff; /* White background for articles */
-  border: 1px solid #f1f1f1; /* Soft border color */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
-}
-
-.news-summary .article-item:hover {
-  background-color: #f9f9f9; /* Light gray on hover */
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow */
-  transform: scale(1.02);
-}
-
-/* ----- Headline Text - Clean and Modern ----- */
-.news-summary .article-item h3 {
-  font-family: 'Roboto', sans-serif;
-  font-size: 1.6rem;
-  font-weight: bold;
-  color: #00a3ff; /* Cyan color for headlines */
-  margin: 0 0 5px 0;
-}
-
-/* Article Content */
-.news-summary .article-item p {
-  font-family: 'Roboto', sans-serif;
-  font-size: 1rem;
-  color: #333; /* Dark text for article content */
-  margin: 0;
-  opacity: 0.9;
-}
-
-/* ----- Loading Bar - Simplified Design ----- */
-/* ----- Loading Bar - Simplified Design ----- */
-.loading-bar {
-  width: 90%; /* Increased width for a larger loading bar */
-  max-width: 800px; /* Adjusted max width */
-  padding: 20px; /* Increased padding for more height */
-  text-align: center;
-  font-size: 1.4rem; /* Increased font size for better readability */
-  font-weight: 600; /* Increased font weight */
-  color: #333; /* Dark text */
-  background: #fff; /* White background */
-  border-radius: 15px;
-  border: 1px solid #ddd; /* Light gray border */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Light shadow */
-  transition: none; /* Removed transition */
-}
-
-/* Removed Hover Effect */
-.loading-bar:hover {
-  /* No hover effect to keep it still */
-  box-shadow: none;
-  transform: none;
-}
-
-
-/* ----- Futuristic Loading Animation ----- */
-.loader {
+/* Content Wrapper */
+.content-wrapper {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+/* ----- Summary and Advice Text Content ----- */
+.text-content {
+  flex: 1 1 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.news-summary,
+.investment-advice {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: background 0.3s ease;
+}
+
+.news-summary:hover,
+.investment-advice:hover {
+  background: #ffffff;
+}
+
+.news-summary h3,
+.investment-advice h3,
+.sentiment-score h3 {
+  font-family: 'Simplifica', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #003366;
+  margin-bottom: 10px;
+}
+
+.news-summary p,
+.investment-advice p {
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* ----- Sentiment Score Section (Circle Progress) ----- */
+.sentiment-score {
+  flex: 1 1 30%; /* Ensures the circle container takes up 30% of the space */
+  text-align: center;
+  background: #353a3a;
+  border-radius: 10px;
+ /* Adjusted padding */
+  box-shadow: 0 2px 8px rgba(247, 247, 247, 0.05);
+ /* Reduced margin-top */
+}
+
+.sentiment-score h3 {
+  margin-bottom: 40px;
+  color: white; /* Set text color to white */
+}
+
+.circle-container {
+  position: relative;
+  width: 100%; /* Adjusted to a size that fits well in the flex layout */
+  height: 70%; /* Matching height to keep it circular */
+  margin: auto;
+  margin-left: 7%;
+}
+
+.progress-circle {
+  transform: rotate(-90deg); /* Rotates the circle so it starts from the top */
+  width: 100%;
+  height: 100%;
+  
+}
+
+.circle-bg {
+  fill: none;
+  stroke: rgba(247, 247, 247, 0.05); /* Light gray background circle */
+  stroke-width: 6;
+}
+
+.circle {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 5;
+  stroke-linecap: round;
+  transition: stroke-dasharray 1s ease;
+}
+
+.score-text {
+  position: absolute;
+  top: 45%;
+  left: 46%;
+  transform: translate(-50%, -50%);
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #f9f9f9;
+}
+
+/* ----- Loading Indicator Styling ----- */
+.loading-indicator {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  margin-top: 15px;
+  justify-content: center;
+  padding: 20px;
+  background-color: white; /* Ensure the container is white */
+  border-radius: 8px; /* Optional: Adds rounded corners for a cleaner look */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for better visibility */
 }
 
-.loader span {
-  width: 12px;
-  height: 12px;
-  margin: 0 5px;
-  background: #00a3ff; /* Cyan dots */
-  border-radius: 50%;
-  animation: loading 1.5s infinite ease-in-out;
-}
 
-/* Different Animation Delay for Each Dot */
-.loader span:nth-child(1) { animation-delay: 0s; }
-.loader span:nth-child(2) { animation-delay: 0.2s; }
-.loader span:nth-child(3) { animation-delay: 0.4s; }
-.loader span:nth-child(4) { animation-delay: 0.6s; }
 
-@keyframes loading {
-  0%, 100% {
-      transform: scale(1);
-      opacity: 1;
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
-  50% {
-      transform: scale(1.5);
-      opacity: 0.3;
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-indicator p {
+  font-size: 1.4rem;
+  color: #333;
+  margin-top: 10px;
+  font-weight: 600;
+  color: #003366;
+}
+
+/* ----- Error Message ----- */
+.error {
+  color: red;
+  font-size: 1.4rem;
+  text-align: center;
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+/* ----- Additional Improvements ----- */
+
+/* Hover effect for content */
+.text-content:hover {
+  background: #f4f8fc;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Container responsiveness */
+@media (max-width: 768px) {
+  .content-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sentiment-score {
+    margin-top: 20px;
   }
 }

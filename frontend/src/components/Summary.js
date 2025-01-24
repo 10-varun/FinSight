@@ -1,106 +1,104 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './Summary.css';
+import React, { useState, useEffect, useRef } from "react";
+import "./Summary.css";
 
 function Summary({ summary, overallScore, investmentAdvice, error, isLoading }) {
-  const [fetchError, setFetchError] = useState(null); // Track fetch errors
-  const [typedSummary, setTypedSummary] = useState('');
-  const [typedScore, setTypedScore] = useState(''); // Set initial state as empty
-  const [typedAdvice, setTypedAdvice] = useState(''); // Set initial state as empty
+  const [fetchError, setFetchError] = useState(null);
+  const [typedSummary, setTypedSummary] = useState("");
+  const [typedAdvice, setTypedAdvice] = useState("");
+  const [typedScore, setTypedScore] = useState("");
 
-  const indexRefSummary = useRef(0); // Ref for summary typing
-  const indexRefScore = useRef(0); // Ref for score typing
-  const indexRefAdvice = useRef(0); // Ref for advice typing
+  const indexRefSummary = useRef(0);
+  const indexRefAdvice = useRef(0);
+  const indexRefScore = useRef(0);
 
-  const isTypingRefSummary = useRef(false); // Ref to track if summary is being typed
-  const isTypingRefScore = useRef(false); // Ref to track if score is being typed
-  const isTypingRefAdvice = useRef(false); // Ref to track if advice is being typed
+  const isTypingRefSummary = useRef(false);
+  const isTypingRefAdvice = useRef(false);
+  const isTypingRefScore = useRef(false);
 
   useEffect(() => {
     if (!summary) {
-      setFetchError('No summary available.');
+      setFetchError("No summary available.");
     } else {
-      setFetchError(null); // Reset error if summary is available
-      typeSummary(summary); // Start typing the summary
+      setFetchError(null);
+      typeSummary(summary);
     }
   }, [summary]);
 
   useEffect(() => {
-    if (overallScore !== undefined && !typedScore) {
-      setTypedScore(''); // Ensure the score starts empty
-      typeScore(`Overall Sentiment Score: ${overallScore}`); // Start typing the sentiment score after summary
-    }
-  }, [overallScore]);
-
-  useEffect(() => {
     if (investmentAdvice && !typedAdvice) {
-      setTypedAdvice(''); // Ensure the advice starts empty
-      typeAdvice(investmentAdvice); // Start typing the investment advice after score
+      typeAdvice(investmentAdvice);
     }
   }, [investmentAdvice]);
 
-  // Typing animation function for Summary
+  useEffect(() => {
+    if (overallScore !== undefined && !typedScore) {
+      typeScore(`${overallScore}/10`); // Fixed syntax here
+    }
+  }, [overallScore]);
+
   const typeSummary = (content) => {
-    if (isTypingRefSummary.current) return; // Prevent new typing until previous one finishes
+    if (isTypingRefSummary.current) return;
     isTypingRefSummary.current = true;
     indexRefSummary.current = 0;
-    setTypedSummary('');
+    setTypedSummary("");
 
     const interval = setInterval(() => {
       const nextChar = content.charAt(indexRefSummary.current);
       setTypedSummary((prev) => prev + nextChar);
       indexRefSummary.current++;
-
       if (indexRefSummary.current >= content.length) {
         clearInterval(interval);
         isTypingRefSummary.current = false;
-        if (overallScore !== undefined) {
-          typeScore(`Overall Sentiment Score: ${overallScore}`); // Start typing the sentiment score once summary is done
-        }
       }
-    }, 5); // Typing speed for summary
+    }, 5);
   };
 
-  // Typing animation function for Sentiment Score
-  const typeScore = (content) => {
-    if (isTypingRefScore.current) return;
-    isTypingRefScore.current = true;
-    indexRefScore.current = 0;
-    setTypedScore(''); // Ensure score starts as empty
-
-    const interval = setInterval(() => {
-      const nextChar = content.charAt(indexRefScore.current);
-      setTypedScore((prev) => prev + nextChar);
-      indexRefScore.current++;
-
-      if (indexRefScore.current >= content.length) {
-        clearInterval(interval);
-        isTypingRefScore.current = false;
-        typeAdvice(investmentAdvice); // Start typing the investment advice once score is done
-      }
-    }, 5); // Typing speed for score
-  };
-
-  // Typing animation function for Investment Advice
   const typeAdvice = (content) => {
     if (isTypingRefAdvice.current) return;
     isTypingRefAdvice.current = true;
     indexRefAdvice.current = 0;
-    setTypedAdvice(''); // Ensure advice starts as empty
+    setTypedAdvice("");
 
     const interval = setInterval(() => {
       const nextChar = content.charAt(indexRefAdvice.current);
       setTypedAdvice((prev) => prev + nextChar);
       indexRefAdvice.current++;
-
       if (indexRefAdvice.current >= content.length) {
         clearInterval(interval);
         isTypingRefAdvice.current = false;
       }
-    }, 5); // Typing speed for advice
+    }, 5);
+  };
+
+  const typeScore = (content) => {
+    if (isTypingRefScore.current) return;
+    isTypingRefScore.current = true;
+    indexRefScore.current = 0;
+    setTypedScore("");
+
+    const interval = setInterval(() => {
+      const nextChar = content.charAt(indexRefScore.current);
+      setTypedScore((prev) => prev + nextChar);
+      indexRefScore.current++;
+      if (indexRefScore.current >= content.length) {
+        clearInterval(interval);
+        isTypingRefScore.current = false;
+      }
+    }, 5);
+  };
+
+  const getCircleColor = (score) => {
+    if (score >= 7) {
+      return "#4CAF50";
+    } else if (score >= 4) {
+      return "#FFEB3B";
+    } else {
+      return "#F44336";
+    }
   };
 
   return (
-    <section className="summary">
+    <section className="summary-container">
       {isLoading ? (
         <div className="loading-indicator">
           <div className="spinner"></div>
@@ -111,32 +109,43 @@ function Summary({ summary, overallScore, investmentAdvice, error, isLoading }) 
       ) : fetchError ? (
         <p className="error">{fetchError}</p>
       ) : (
-        <>
-          {/* Display Summary with typing animation */}
-          {typedSummary ? (
+        <div className="content-wrapper">
+          <div className="text-content">
             <div className="news-summary">
-              <h3>Summary of Articles:</h3>
-              <p>{typedSummary}</p>
+              <h3>Summary of Articles</h3>
+              <p>{typedSummary || "No summary available."}</p>
             </div>
-          ) : (
-            <p>No summary available.</p>
-          )}
-
-          {/* Display Sentiment Score after Summary */}
-          {typedScore && !isTypingRefSummary.current ? (
-            <div className="overall-score">
-              <h3>{typedScore}</h3>
-            </div>
-          ) : null}
-
-          {/* Display Investment Advice after Sentiment Score */}
-          {typedAdvice && !isTypingRefScore.current ? (
             <div className="investment-advice">
-              <h3>Investment Advice:</h3>
-              <p>{typedAdvice}</p>
+              <h3>Investment Advice</h3>
+              <p>{typedAdvice || "No advice available."}</p>
             </div>
-          ) : null}
-        </>
+          </div>
+
+          <div className="sentiment-score">
+            <h3>Overall Sentiment Score</h3>
+            <div className="circle-container">
+              <svg className="progress-circle" viewBox="0 0 36 36">
+                <path
+                  className="circle-bg"
+                  d="M18 4
+                    a 12 12 0 0 1 0 24
+                    a 12 12 0 0 1 0 -24"
+                  fill="none"
+                />
+                <path
+                  className="circle"
+                  strokeDasharray={`${(overallScore || 0) * 10}, 100`}
+                  stroke={getCircleColor(overallScore)}
+                  fill="none"
+                  d="M18 4
+                    a 12 12 0 0 1 0 24
+                    a 12 12 0 0 1 0 -24"
+                />
+              </svg>
+              <p className="score-text">{typedScore}</p>
+            </div>
+          </div>
+        </div>
       )}
     </section>
   );
