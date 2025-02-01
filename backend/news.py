@@ -3,7 +3,7 @@ import requests
 import re
 
 # Your provided API keys
-API_KEY = "AIzaSyDpvyEy-nl2xHTZR_o8BPw1JZFr4G55uLQ"
+API_KEY = "AIzaSyBcBs3n_CkYkxJ6NiRiUtxcZMconCSbnIE"
 SEARCH_ENGINE_ID = "c4676cd5f4a3f4b5a"
 NEWS_API_KEY = "a3b81112f1c94a31970a3af0bfba5137"
 FINHUB_API_KEY = "cts3hf1r01qh9oes7cng-finhub"
