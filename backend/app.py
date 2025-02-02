@@ -74,6 +74,10 @@ def predict():
         response = {
             "past_dates": prediction_data["past_dates"],
             "past_prices": prediction_data["past_prices"],
+            "six_months_dates": prediction_data["six_months_dates"],
+            "six_months_prices": prediction_data["six_months_prices"],
+            "three_months_dates": prediction_data["three_months_dates"],
+            "three_months_prices": prediction_data["three_months_prices"],
             "predicted_dates": prediction_data["predicted_dates"],
             "predicted_prices": prediction_data["predicted_prices"]
         }
