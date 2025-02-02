@@ -1,14 +1,12 @@
-import pandas as pd
 import yfinance as yf
 import datetime
 import numpy as np
 import tensorflow as tf
 from sklearn.preprocessing import MinMaxScaler
 from yahooquery import search
-
+import pandas as pd
 # Load the trained model (you can adjust the path as needed)
 model = tf.keras.models.load_model('./model/my_model.h5')
-
 
 def predict_stock_prices(company_name):
     try:
@@ -42,6 +40,13 @@ def predict_stock_prices(company_name):
         # Data preparation: Use only the 'Date' and 'Close' columns
         df = df[['Date', 'Close']]
         df['Date'] = pd.to_datetime(df['Date'], utc=True).dt.date
+
+        # Extract 6-month and 3-month data
+        six_months_ago = df['Date'].iloc[-1] - datetime.timedelta(days=180)
+        three_months_ago = df['Date'].iloc[-1] - datetime.timedelta(days=90)
+
+        df_six_months = df[df['Date'] >= six_months_ago]
+        df_three_months = df[df['Date'] >= three_months_ago]
 
         # Normalize the 'Close' prices using MinMaxScaler
         scaler = MinMaxScaler(feature_range=(0, 1))
@@ -83,6 +88,10 @@ def predict_stock_prices(company_name):
         return {
             "past_dates": df['Date'].tolist(),
             "past_prices": df['Close'].tolist(),
+            "six_months_dates": df_six_months['Date'].tolist(),
+            "six_months_prices": df_six_months['Close'].tolist(),
+            "three_months_dates": df_three_months['Date'].tolist(),
+            "three_months_prices": df_three_months['Close'].tolist(),
             "predicted_dates": predicted_df['Date'].tolist(),
             "predicted_prices": predicted_df['Predicted Close'].tolist()
         }
