@@ -27,7 +27,7 @@ const Graph = ({ companyName }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ticker: companyName.toUpperCase() }), // Use companyName prop here
+        body: JSON.stringify({ ticker: companyName.toUpperCase() }),
       });
 
       const data = await response.json();
@@ -38,6 +38,10 @@ const Graph = ({ companyName }) => {
           predicted_prices: data.predicted_prices,
           past_dates: data.past_dates,
           past_prices: data.past_prices,
+          three_months_dates: data.three_months_dates,
+          three_months_prices: data.three_months_prices,
+          six_months_dates: data.six_months_dates,
+          six_months_prices: data.six_months_prices,
         });
       } else {
         setError(data.error || 'Error fetching ticker symbol.');
@@ -59,7 +63,7 @@ const Graph = ({ companyName }) => {
             <h3>Predicted Stock Prices (Next 30 Days)</h3>
             <Line
               data={{
-                labels: graphData.predicted_dates,
+                labels: graphData.predicted_dates.map(date => new Date(date).toDateString()),
                 datasets: [
                   {
                     label: 'Predicted Prices',
@@ -69,27 +73,6 @@ const Graph = ({ companyName }) => {
                   },
                 ],
               }}
-              options={{
-                responsive: true,
-                plugins: { legend: { display: true, position: 'top' } },
-                scales: {
-                  x: {
-                    title: { display: true, text: 'Date' },
-                    ticks: {
-                      callback: (value, index) => {
-                        const date = new Date(graphData.predicted_dates[index]);
-                        return date.toLocaleDateString('en-GB', {
-                          day: '2-digit',
-                          month: 'short',
-                        }); // Format: "25 Jan"
-                      },
-                    },
-                  },
-                  y: {
-                    title: { display: true, text: 'Price' },
-                  },
-                },
-              }}
             />
           </div>
 
@@ -98,7 +81,8 @@ const Graph = ({ companyName }) => {
             <h3>Past Stock Prices</h3>
             <Line
               data={{
-                labels: graphData.past_dates,
+                
+                labels: graphData.past_dates.map(date => new Date(date).toDateString()),
                 datasets: [
                   {
                     label: 'Past Prices',
@@ -108,27 +92,43 @@ const Graph = ({ companyName }) => {
                   },
                 ],
               }}
-              options={{
-                responsive: true,
-                plugins: { legend: { display: true, position: 'top' } },
-                scales: {
-                  x: {
-                    title: { display: true, text: 'Date' },
-                    ticks: {
-                      callback: (value, index) => {
-                        const date = new Date(graphData.past_dates[index]);
-                        return date.toLocaleDateString('en-GB', {
-                          day: 'numeric',
-                          month: 'short',
-                          year: 'numeric',
-                        }); // Format: "2 Jan 2025"
-                      },
-                    },
+            />
+          </div>
+
+          {/* Three Months Stock Prices Graph */}
+          <div className="graph-wrapper">
+            <h3>Stock Prices (Last 3 Months)</h3>
+            <Line
+              data={{
+                
+                labels: graphData.three_months_dates.map(date => new Date(date).toDateString()),
+                datasets: [
+                  {
+                    label: 'Three Months Prices',
+                    data: graphData.three_months_prices,
+                    borderColor: 'rgba(54, 162, 235,1)',
+                    fill: false,
                   },
-                  y: {
-                    title: { display: true, text: 'Price' },
+                ],
+              }}
+            />
+          </div>
+
+          {/* Six Months Stock Prices Graph */}
+          <div className="graph-wrapper">
+            <h3>Stock Prices (Last 6 Months)</h3>
+            <Line
+              data={{
+               
+                labels: graphData.six_months_dates.map(date => new Date(date).toDateString()),
+                datasets: [
+                  {
+                    label: 'Six Months Prices',
+                    data: graphData.six_months_prices,
+                    borderColor: 'rgba(153, 102, 255,1)',
+                    fill: false,
                   },
-                },
+                ],
               }}
             />
           </div>

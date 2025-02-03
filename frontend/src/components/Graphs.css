@@ -67,3 +67,22 @@
   color: #d9534f; /* Red for error messages */
   font-weight: bold;
 }
+
+/* New styles for 3-month and 6-month graphs */
+.graph-container .graph-wrapper-3m,
+.graph-container .graph-wrapper-6m {
+  width: 900px;
+  height: 500px;
+  margin: 20px auto;
+  border: 1px solid #ddd; /* Light border to separate sections */
+  border-radius: 5px;
+  padding: 15px;
+  background-color: #fafafa; /* Subtle background difference */
+}
+
+.graph-container h3 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #222; /* Slightly darker text */
+  font-size: 18px;
+}
