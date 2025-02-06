@@ -6,7 +6,7 @@ from sklearn.preprocessing import MinMaxScaler
 from yahooquery import search
 import pandas as pd
 # Load the trained model (you can adjust the path as needed)
-model = tf.keras.models.load_model('./model/my_model.h5')
+model = tf.keras.models.load_model('./model/lstm.h5')
 
 def predict_stock_prices(company_name):
     try:
