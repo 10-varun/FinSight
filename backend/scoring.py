@@ -26,8 +26,8 @@ model_gemini = genai.GenerativeModel("gemini-pro")
 @retry(stop=stop_after_attempt(3), wait=wait_fixed(5))  # Retry 3 times with 5-second intervals
 def load_model_and_vectorizer():
     try:
-        sentiment_model = joblib.load('model/Latest_Model.joblib')  # Replace with actual path
-        vectorizer = joblib.load('model/improved_tfidf_vectorizer.joblib')  # Replace with actual path
+        sentiment_model = joblib.load('model/regessorModel.joblib')  # Replace with actual path
+        vectorizer = joblib.load('model/vectorize.joblib')  # Replace with actual path
         return sentiment_model, vectorizer
     except Exception as e:
         logger.error(f"Error loading sentiment model or vectorizer: {e}")
