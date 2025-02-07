@@ -100,12 +100,10 @@ function Summary({ summary, overallScore, investmentAdvice, error, isLoading }) 
   return (
     <section className="summary-container">
       {isLoading ? (
-        <div class="loader">
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
-      </div>
+        <div className="loading-indicator">
+          <div className="spinner"></div>
+          <p>Loading company data...</p>
+        </div>
       ) : error ? (
         <p className="error">{error}</p>
       ) : fetchError ? (
