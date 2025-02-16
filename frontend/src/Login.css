@@ -1,0 +1,144 @@
+/* Import Poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+/* General Container */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4; /* Light gray background for the entire page */
+}
+
+/* Box styling for modern feel */
+.auth-box {
+    background-color: #ffffff; /* White background for the box */
+    padding: 40px 35px;
+    border-radius: 10px;  /* Rounded corners for a modern touch */
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    width: 380px;
+    color: #000000;  /* Black font color */
+    font-family: 'Poppins', sans-serif; /* Use Poppins font */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* Center content */
+}
+
+/* Hover effect for auth box */
+.auth-box:hover {
+    transform: translateY(-10px); /* Lift effect */
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15); /* Darker shadow on hover */
+}
+
+/* Heading Styling */
+.auth-box h2 {
+    margin-bottom: 25px;
+    color: #000000;  /* Black heading text */
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+/* Input Field Styling */
+.auth-box input {
+    width: 100%;
+    padding: 14px;
+    margin: 12px 0;
+    border: 2px solid #dcdcdc;  /* Light gray border */
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #f7f7f7;  /* Light background for input fields */
+    color: #000000;  /* Black text inside inputs */
+    box-sizing: border-box;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Focus effect for inputs */
+.auth-box input:focus {
+    border-color: #000000; /* Black border when focused */
+    background-color: #ffffff; /* White background on focus */
+    outline: none;
+}
+
+/* Submit Button Styling */
+.auth-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #000000; /* Black background for button */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-sizing: border-box;
+}
+
+/* Hover effect for the button */
+.auth-btn:hover {
+    background-color: #333333; /* Slightly darker black on hover */
+    transform: translateY(-3px); /* Subtle lift effect */
+}
+
+/* Active effect for the button */
+.auth-btn:active {
+    transform: translateY(1px); /* Button presses down on click */
+}
+
+/* Link Styling (for the auth link) */
+.auth-link {
+    color: #000000;  /* Black color for link */
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 0.95rem;
+    transition: color 0.3s ease-in-out;
+}
+
+.auth-link:hover {
+    color: #444444;  /* Darker shade on hover */
+}
+
+/* Styling for text beneath the form */
+.auth-box p {
+    margin-top: 10px;
+    color: #555555;  /* Slightly gray color for the text */
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* Subtle Fade-in Effect on Box */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply Fade-in effect */
+.auth-box {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .auth-box {
+        width: 100%;
+        padding: 30px 20px;
+    }
+
+    .auth-box h2 {
+        font-size: 1.6rem;
+    }
+
+    .auth-btn {
+        font-size: 15px;
+    }
+}

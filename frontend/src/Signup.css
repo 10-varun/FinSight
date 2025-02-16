@@ -1,0 +1,138 @@
+/* General Container */
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4; /* Light gray background for the entire page */
+}
+
+/* Box styling for modern feel */
+.signup-box {
+    background-color: #ffffff; /* White background for the box */
+    padding: 40px 35px;
+    border-radius: 10px;  /* Rounded corners for a modern touch */
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    width: 380px;
+    color: #000000;  /* Black font color */
+    font-family: 'Poppins', sans-serif; /* Clean modern font */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Hover effect for signup box */
+.signup-box:hover {
+    transform: translateY(-10px); /* Lift effect */
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15); /* Darker shadow on hover */
+}
+
+/* Heading Styling */
+.signup-box h2 {
+    margin-bottom: 20px;
+    color: #000000;  /* Black heading text */
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+/* Input Field Styling */
+.signup-box input {
+    width: 100%;
+    padding: 14px;
+    margin: 12px 0;
+    border: 2px solid #dcdcdc;  /* Light gray border */
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #f7f7f7;  /* Light background for input fields */
+    color: #333333;  /* Dark text color */
+    box-sizing: border-box;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Focus effect for inputs */
+.signup-box input:focus {
+    border-color: #000000; /* Black border when focused */
+    background-color: #ffffff; /* White background on focus */
+    outline: none;
+}
+
+/* Submit Button Styling */
+.signup-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #000000; /* Black background for button */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-sizing: border-box;
+}
+
+/* Hover effect for the button */
+.signup-btn:hover {
+    background-color: #333333; /* Slightly darker black on hover */
+    transform: translateY(-3px); /* Subtle lift effect */
+}
+
+/* Active effect for the button */
+.signup-btn:active {
+    transform: translateY(1px); /* Button presses down on click */
+}
+
+/* Link Styling (for the signup link) */
+.signup-link {
+    color: #000000;  /* Black color for link */
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 0.95rem;
+    transition: color 0.3s ease-in-out;
+}
+
+.signup-link:hover {
+    color: #444444;  /* Darker shade on hover */
+}
+
+/* Styling for text beneath the form */
+.signup-box p {
+    margin-top: 10px;
+    color: #555555;  /* Slightly gray color for the text */
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* Subtle Fade-in Effect on Box */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply Fade-in effect */
+.signup-box {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .signup-box {
+        width: 100%;
+        padding: 30px 20px;
+    }
+
+    .signup-box h2 {
+        font-size: 1.6rem;
+    }
+
+    .signup-btn {
+        font-size: 15px;
+    }
+}

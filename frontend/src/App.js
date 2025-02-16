@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
-import './App.css';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainPage from './MainPage';
 import SearchResultsPage from './SearchResultsPage';
+import Login from './Login';
+import Signup from './Signup';
 import axios from 'axios';
+import supabase from './supabaseClient';
 
 function App() {
   const [company, setCompany] = useState('');
-  const [summary, setSummary] = useState('');  
-  const [overallScore, setOverallScore] = useState(null); 
+  const [summary, setSummary] = useState('');
+  const [overallScore, setOverallScore] = useState(null);
   const [investmentAdvice, setInvestmentAdvice] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -22,16 +24,16 @@ function App() {
 
     setIsLoading(true);
     setError('');
-    setShowResults(false); 
+    setShowResults(false);
 
     try {
       const response = await axios.post('http://127.0.0.1:5000/api/news', { company });
-    
+
       if (response.data) {
         setSummary(response.data.summary || '');
         setOverallScore(response.data.overall_score || null);
         setInvestmentAdvice(response.data.investment_advice || '');
-        setShowResults(true); 
+        setShowResults(true);
       } else {
         setError('No data found for this company');
       }
@@ -54,24 +56,24 @@ function App() {
                 company={company}
                 setCompany={setCompany}
                 handleSearch={handleSearch}
-                showResults={showResults}
-                error={error}
               />
             }
           />
           <Route
             path="/search-results"
             element={
-              <SearchResultsPage 
+              <SearchResultsPage
                 summary={summary}
                 overallScore={overallScore}
                 investmentAdvice={investmentAdvice}
                 error={error}
                 isLoading={isLoading}
-                companyName={company} 
+                companyName={company}
               />
             }
           />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
       </div>
     </Router>
