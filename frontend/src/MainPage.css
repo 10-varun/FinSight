@@ -5,20 +5,23 @@
   background-color: rgb(255, 255, 255);
 }
 
+.logodiv{
+  height: 8vh;
+  width: 4%;
+  background-image: url("./images/logo.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
 
 .main-nav {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   width: 97%;
   padding: 10px 20px;
   background-color: white;
   box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
-}
-
-.main-nav .logo {
-  font-size: 1.5rem;
-  font-weight: bold;
 }
 
 .main-nav div {
@@ -47,7 +50,6 @@
   color: #153d64;
 }
 
-/* Styling for Log In and Sign Up Buttons */
 .auth-buttons {
   position: absolute;
   top: 10px;

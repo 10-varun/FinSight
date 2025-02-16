@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import MainPage from './MainPage';
 import SearchResultsPage from './SearchResultsPage';
 import Login from './Login';
 import Signup from './Signup';
 import axios from 'axios';
-import supabase from './supabaseClient';
+import MainPage from './MainPage';
 
 function App() {
   const [company, setCompany] = useState('');
@@ -14,7 +13,7 @@ function App() {
   const [investmentAdvice, setInvestmentAdvice] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [showResults, setShowResults] = useState(false);
+  const [, setShowResults] = useState(false);
 
   const handleSearch = async () => {
     if (!company) {

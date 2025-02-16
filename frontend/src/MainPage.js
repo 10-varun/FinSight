@@ -55,6 +55,7 @@ function MainPage({ company, setCompany, handleSearch }) {
   return (
     <main className="main-page">
       <nav className="main-nav">
+        <div className="logodiv"></div>
         <div className="nav-container">
           <div className="nav-links">
             <button onClick={() => setActiveSection("home")} className={activeSection === "home" ? "active" : ""}>
