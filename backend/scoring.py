@@ -18,16 +18,16 @@ logger = logging.getLogger(__name__)
 app = FastAPI()
 
 # Configure Gemini API
-GEMINI_API_KEY = "AIzaSyBmDUcf7WAtKiPnGcJbGi-msbTEKoDu-AQ"
+GEMINI_API_KEY = "AIzaSyDo_j_UJEHRvp3qjDu4O3HuJhtiCrq0N5w"
 genai.configure(api_key=GEMINI_API_KEY)
-model_gemini = genai.GenerativeModel("gemini-pro")
+model_gemini = genai.GenerativeModel("gemini-1.5-flash")
 
 # Retry logic for loading sentiment analysis model and vectorizer
 @retry(stop=stop_after_attempt(3), wait=wait_fixed(5))  # Retry 3 times with 5-second intervals
 def load_model_and_vectorizer():
     try:
         sentiment_model = joblib.load('./model/Latest_Model.joblib')  # Replace with actual path
-        vectorizer = joblib.load('./model/improved_tfidf_vectorize.joblib')  # Replace with actual path
+        vectorizer = joblib.load('./model/improved_tfidf_vectorizer_with_joblib (1).joblib')  # Replace with actual path
         return sentiment_model, vectorizer
     except Exception as e:
         logger.error(f"Error loading sentiment model or vectorizer: {e}")
