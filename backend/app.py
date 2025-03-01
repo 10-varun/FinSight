@@ -6,8 +6,8 @@ from decimal import Decimal
 from news import fetch_and_return_articles
 from scoring import process_articles
 from charts import get_stock_data
-from stock_lstm import predict_stock_prices  # Importing the prediction function
-from supabase import create_client, Client  # Import Supabase client
+from stock_lstm import predict_stock_prices  
+from supabase import create_client, Client 
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -60,6 +60,19 @@ def get_news():
     except Exception as e:
         app.logger.exception("Error occurred while processing the request.")
         return jsonify({'error': str(e)}), 500
+@app.route('/api/stock-data/<company_name>', methods=['GET'])
+def get_stock_data_endpoint(company_name):
+    try:
+        app.logger.debug(f"Fetching stock data for company: {company_name}")
+        stock_data = get_stock_data(company_name)
+
+        if 'error' in stock_data:
+            return jsonify({'error': stock_data['error']}), 404
+
+        return jsonify(stock_data)
+    except Exception as e:
+        app.logger.exception("Error occurred while fetching stock data.")
+        return jsonify({'error': str(e)}), 500    
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
@@ -82,7 +95,7 @@ def predict():
         # Sort users by last_sign_in_at (most recent first)
         sorted_users = sorted(
             user_data,
-            key=lambda u: u.last_sign_in_at if u.last_sign_in_at else datetime.min.replace(tzinfo=timezone.utc),  # Ensure timezone-awareness
+            key=lambda u: u.last_sign_in_at if u.last_sign_in_at else datetime.min.replace(tzinfo=timezone.utc),  
             reverse=True
         )
 
@@ -95,7 +108,7 @@ def predict():
 
 
 
-        # ✅ Fetch latest prediction for the company
+        
         existing_entry, _ = (
             supabase.table('stock_predictions')
             .select('*')
@@ -116,7 +129,7 @@ def predict():
         news_articles = fetch_and_return_articles(ticker)
         news_result = process_articles(news_articles) if news_articles else {"summary": None, "overall_score": None}
 
-        # ✅ Pass user_email to save_to_supabase()
+      
         app.logger.info(f"🔹 Saving new data for {ticker} (User: {user_email})...")
         save_to_supabase(ticker, prediction_data, news_result, user_email)
 
@@ -169,7 +182,7 @@ def save_to_supabase(company, data, news_data, user_email):
                 "predicted_prices": data["predicted_prices"],
                 "summary": news_data["summary"],
                 "overall_score": news_data["overall_score"],
-                "user_email": user_email,  # ✅ Add user email
+                "user_email": user_email,  
                 "created_at": datetime.now(timezone.utc).isoformat(),
             }
         ]).execute()

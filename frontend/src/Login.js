@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import supabase from "./supabaseClient"; // Ensure this is correctly configured
+import supabase from "./supabaseClient"; 
 import "./Login.css";
 
 function Login() {
@@ -9,11 +9,11 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // Handle Email/Password Login
+  
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    // Ensure email and password fields are not empty
+    
     if (!email || !password) {
       alert("Please enter both email and password.");
       return;
@@ -22,16 +22,16 @@ function Login() {
     setLoading(true);
 
     try {
-      // Attempt to log in using Supabase's sign-in method
+    
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
 
-      // Log response data and error for debugging
+      
       console.log("Login Response:", data, error);
 
-      // Handle login errors
+    
       if (error) {
         console.error("Login Error:", error.message);
         alert("Error logging in: " + error.message);
@@ -39,27 +39,27 @@ function Login() {
         return;
       }
 
-      // Check if the user's email is confirmed
+      
       if (!data.user.confirmed_at) {
         alert("Please confirm your email before logging in.");
         setLoading(false);
         return;
       }
 
-      // Redirect to the main page after successful login
+      
       console.log("Logged in successfully:", data);
-      navigate("/"); // No alert for login success
+      navigate("/");
     } catch (err) {
-      console.error("Unexpected Error:", err); // Log full error for debugging
+      console.error("Unexpected Error:", err); 
 
-      // Enhanced error handling
+     
       if (err instanceof Error) {
         alert(`An unexpected error occurred: ${err.message}\nStack Trace: ${err.stack || "No stack trace available."}`);
       } else {
         alert("An unexpected error occurred. Please try again.");
       }
     } finally {
-      setLoading(false); // Reset loading state
+      setLoading(false); 
     }
   };
 
