@@ -16,6 +16,7 @@
   margin: 40px auto;
   transition: all 0.3s ease-in-out;
   overflow-wrap: break-word; /* Prevents content overflow */
+  height: 70vh;
 }
 
 /* Content Wrapper */

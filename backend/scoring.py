@@ -18,9 +18,9 @@ logger = logging.getLogger(__name__)
 app = FastAPI()
 
 # Configure Gemini API
-GEMINI_API_KEY = "AIzaSyBmDUcf7WAtKiPnGcJbGi-msbTEKoDu-AQ"
+GEMINI_API_KEY = "AIzaSyDo_j_UJEHRvp3qjDu4O3HuJhtiCrq0N5w"
 genai.configure(api_key=GEMINI_API_KEY)
-model_gemini = genai.GenerativeModel("gemini-pro")
+model_gemini = genai.GenerativeModel("gemini-1.5-flash")
 
 # Retry logic for loading sentiment analysis model and vectorizer
 @retry(stop=stop_after_attempt(3), wait=wait_fixed(5))  # Retry 3 times with 5-second intervals
@@ -98,7 +98,7 @@ def process_articles(news_articles):
     # Now apply the cleaning function after summarizing
     combined_summary = clean_article_text(combined_summary)
     
-    sentiment_scores = [get_sentiment_score(headline) for headline in headlines]
+    sentiment_scores = [get_sentiment_score(headline) for headline in headlines[:6]]
     avg_sentiment_score = (math.floor((sum(sentiment_scores) / len(sentiment_scores)) * 100) / 100) if sentiment_scores else 0.00
     normalized_score = normalize_sentiment_score(avg_sentiment_score, min_score, max_score)
     normalized_score = Decimal(normalized_score).quantize(Decimal('0.00'), rounding=ROUND_DOWN)

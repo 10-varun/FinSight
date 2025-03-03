@@ -15,10 +15,16 @@
   padding: 20px;
   font-family: Arial, sans-serif;
   color: #333; /* Dark gray for text */
+  display: flex; /* Enable flexbox for centering */
+  flex-direction: column; /* Stack elements vertically */
+  justify-content: center; /* Center items vertically */
+  align-items: center; /* Center items horizontally */
 }
 
 .graph-container .input-container {
   margin-bottom: 20px;
+  display: flex;
+  justify-content: center; /* Center input field */
 }
 
 .graph-container input[type="text"] {
@@ -39,6 +45,7 @@
   border-radius: 4px;
   cursor: pointer;
   margin-right: 20px; /* Increase space between buttons */
+  margin-top: 10px; /* Adjust space above the button */
 }
 
 .graph-container button:hover {

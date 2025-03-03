@@ -39,6 +39,10 @@ h3 {
   font-size: 0.9em; /* Smaller font size for more compact table */
 }
 
+.results-section{
+  height: 80vh;
+}
+
 /* Table Header Styling */
 .stock-table th, .stock-table td {
   border: 1px solid #ddd;
