@@ -34,7 +34,7 @@ model_gemini = genai.GenerativeModel("gemini-1.5-flash")
 def load_model_and_vectorizer():
     try:
         sentiment_model = joblib.load('.\model\Latest_Model.joblib')  # Replace with actual path
-        vectorizer = joblib.load('.\model\improved_tfidf_vectorize.joblib')  # Replace with actual path
+        vectorizer = joblib.load('.\model\improved_tfidf_vectorizer.joblib')  # Replace with actual path
         return sentiment_model, vectorizer
     except Exception as e:
         logger.error(f"Error loading sentiment model or vectorizer: {e}")
