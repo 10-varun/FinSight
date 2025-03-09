@@ -5,6 +5,7 @@ import AboutUs from "./components/AboutUs";
 import ContactUs from "./components/ContactUs";
 import AboutProduct from "./components/AboutProduct";
 import Home from "./components/Home";
+import History from "./History"; // Import History component
 import supabase from "./supabaseClient";
 
 function MainPage({ company, setCompany, handleSearch }) {
@@ -47,6 +48,8 @@ function MainPage({ company, setCompany, handleSearch }) {
         return <ContactUs />;
       case "about-product":
         return <AboutProduct />;
+      case "history":
+        return <History />; // Display History when selected
       default:
         return null;
     }
@@ -88,6 +91,7 @@ function MainPage({ company, setCompany, handleSearch }) {
                 </button>
                 {showDropdown && (
                   <div className="dropdown-menu">
+                    <button onClick={() => setActiveSection("history")}>History</button> 
                     <button onClick={async () => await supabase.auth.signOut()}>Logout</button>
                   </div>
                 )}
@@ -96,6 +100,17 @@ function MainPage({ company, setCompany, handleSearch }) {
           </div>
         </div>
       </nav>
+
+      {/* Dropdown should be above history */}
+      {showDropdown && (
+        <div className="dropdown-container">
+          <div className="dropdown-menu">
+            <button onClick={() => setActiveSection("history")}>History</button> 
+            <button onClick={async () => await supabase.auth.signOut()}>Logout</button>
+          </div>
+        </div>
+      )}
+
       <div className="active-section">{renderActiveSection()}</div>
     </main>
   );

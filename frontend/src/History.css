@@ -1,0 +1,140 @@
+/* Light theme background */
+.history-container {
+  width: 90%;
+  margin: 20px auto;
+  background-color: #f8f9fa; /* Light pastel background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Title Styling */
+.history-title {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #2c3e50; /* Dark gray-blue */
+  font-weight: bold;
+}
+
+/* Search bar */
+.search-bar {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #ffffff;
+}
+
+/* History list container */
+.history-list-container {
+  overflow-x: auto;
+}
+
+/* Table */
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+/* Table Headers */
+.history-table th {
+  background-color: #e3e7ed; /* Soft grayish-blue */
+  color: #2c3e50;
+  font-weight: bold;
+  padding: 12px;
+  text-align: center;
+}
+
+/* Table Rows */
+.history-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Alternating row colors */
+.history-table tr:nth-child(even) {
+  background-color: #f2f4f8; /* Light bluish-gray */
+}
+
+/* Actions Section */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Button Styling */
+.summary-btn,
+.graph-btn {
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+  font-size: 14px;
+}
+
+/* Soft pastel button colors */
+.summary-btn {
+  background-color: #8ecae6; /* Light pastel blue */
+  color: white;
+}
+
+.graph-btn {
+  background-color: #90be6d; /* Soft pastel green */
+  color: white;
+}
+
+/* Button hover effects */
+.summary-btn:hover {
+  background-color: #68b0dd; /* Slightly darker blue */
+}
+
+.graph-btn:hover {
+  background-color: #7da763; /* Slightly darker green */
+}
+
+/* No results message */
+.no-results {
+  text-align: center;
+  padding: 10px;
+  font-size: 16px;
+  color: #666;
+}
+/* Import Professional Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+/* Summary Row */
+.summary-row td {
+  background-color: #eef4ff; /* Light blueish background */
+  padding: 18px;
+  border-top: 1px solid #aac4ff;
+  text-align: justify;
+  font-size: 16px; /* Larger, professional font size */
+  font-weight: 400;
+  line-height: 1.6;
+  color: #2c3e50; /* Darker text for readability */
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: fadeSlideDown 0.4s ease-in-out forwards;
+}
+
+/* Animation: Fade-in and slide-down effect */
+@keyframes fadeSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

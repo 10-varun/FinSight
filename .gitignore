@@ -3,3 +3,9 @@ backend/venv/
 backend/Data/
 backend/utils/__pycache__
 backend/.venv/
+backend/__pycache__
+backend/.env/
+.env
+.env.local
+backend/.env
+frontend/.env.local

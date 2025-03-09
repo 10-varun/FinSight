@@ -10,15 +10,22 @@ from news import fetch_and_return_articles  # Your function to fetch news articl
 import math
 from decimal import Decimal, ROUND_DOWN
 import google.generativeai as genai
+import os
+from dotenv import load_dotenv
+
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 app = FastAPI()
+load_dotenv()
+'''
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")'''
 
-# Configure Gemini API
 GEMINI_API_KEY = "AIzaSyDo_j_UJEHRvp3qjDu4O3HuJhtiCrq0N5w"
+
+
 genai.configure(api_key=GEMINI_API_KEY)
 model_gemini = genai.GenerativeModel("gemini-1.5-flash")
 
@@ -26,8 +33,8 @@ model_gemini = genai.GenerativeModel("gemini-1.5-flash")
 @retry(stop=stop_after_attempt(3), wait=wait_fixed(5))  # Retry 3 times with 5-second intervals
 def load_model_and_vectorizer():
     try:
-        sentiment_model = joblib.load('./model/Latest_Model.joblib')  # Replace with actual path
-        vectorizer = joblib.load('./model/improved_tfidf_vectorize.joblib')  # Replace with actual path
+        sentiment_model = joblib.load('.\model\Latest_Model.joblib')  # Replace with actual path
+        vectorizer = joblib.load('.\model\improved_tfidf_vectorize.joblib')  # Replace with actual path
         return sentiment_model, vectorizer
     except Exception as e:
         logger.error(f"Error loading sentiment model or vectorizer: {e}")
