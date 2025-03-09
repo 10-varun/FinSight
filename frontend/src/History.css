@@ -1,8 +1,11 @@
+/* Import Professional Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
 /* Light theme background */
 .history-container {
   width: 90%;
   margin: 20px auto;
-  background-color: #f8f9fa; /* Light pastel background */
+  background-color: #f8f9fa;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
@@ -13,7 +16,7 @@
 .history-title {
   text-align: center;
   margin-bottom: 15px;
-  color: #2c3e50; /* Dark gray-blue */
+  color: #2c3e50;
   font-weight: bold;
 }
 
@@ -43,7 +46,7 @@
 
 /* Table Headers */
 .history-table th {
-  background-color: #e3e7ed; /* Soft grayish-blue */
+  background-color: #e3e7ed;
   color: #2c3e50;
   font-weight: bold;
   padding: 12px;
@@ -59,7 +62,7 @@
 
 /* Alternating row colors */
 .history-table tr:nth-child(even) {
-  background-color: #f2f4f8; /* Light bluish-gray */
+  background-color: #f2f4f8;
 }
 
 /* Actions Section */
@@ -83,22 +86,22 @@
 
 /* Soft pastel button colors */
 .summary-btn {
-  background-color: #8ecae6; /* Light pastel blue */
+  background-color: #8ecae6;
   color: white;
 }
 
 .graph-btn {
-  background-color: #90be6d; /* Soft pastel green */
+  background-color: #90be6d;
   color: white;
 }
 
 /* Button hover effects */
 .summary-btn:hover {
-  background-color: #68b0dd; /* Slightly darker blue */
+  background-color: #68b0dd;
 }
 
 .graph-btn:hover {
-  background-color: #7da763; /* Slightly darker green */
+  background-color: #7da763;
 }
 
 /* No results message */
@@ -108,19 +111,17 @@
   font-size: 16px;
   color: #666;
 }
-/* Import Professional Font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
 /* Summary Row */
 .summary-row td {
-  background-color: #eef4ff; /* Light blueish background */
+  background-color: #eef4ff;
   padding: 18px;
   border-top: 1px solid #aac4ff;
   text-align: justify;
-  font-size: 16px; /* Larger, professional font size */
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.6;
-  color: #2c3e50; /* Darker text for readability */
+  color: #2c3e50;
   transition: all 0.3s ease-in-out;
   opacity: 0;
   transform: translateY(-10px);
@@ -137,4 +138,24 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Chart container */
+.chart-container {
+  width: 90%;
+  margin: 20px auto;
+  padding-bottom: 3%;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
+  height: 60vh;
+}
+
+/* Graph */
+.history-graph {
+  width: 100% !important;
+}
+
+.history-graph canvas {
+  width: 100% !important;
 }

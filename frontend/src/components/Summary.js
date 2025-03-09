@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Summary.css";
 
-function Summary({ summary, overallScore, investmentAdvice, error, isLoading }) {
+function Summary({ summary, overallScore, investmentAdvice, error, isLoading, company }) {
   const [fetchError, setFetchError] = useState(null);
   const [typedSummary, setTypedSummary] = useState("");
   const [typedAdvice, setTypedAdvice] = useState("");
@@ -10,29 +10,43 @@ function Summary({ summary, overallScore, investmentAdvice, error, isLoading }) 
   const indexRefSummary = useRef(0);
   const indexRefAdvice = useRef(0);
   const indexRefScore = useRef(0);
+  const lastScoreRef = useRef(null); 
 
   const isTypingRefSummary = useRef(false);
   const isTypingRefAdvice = useRef(false);
   const isTypingRefScore = useRef(false);
 
+  // 🔹 Reset values when the company changes
   useEffect(() => {
-    if (!summary) {
-      setFetchError("No summary available.");
-    } else {
+    setTypedSummary("");
+    setTypedAdvice("");
+    setTypedScore("");
+    lastScoreRef.current = null;
+  }, [company]);
+
+  useEffect(() => {
+    if (summary && summary !== typedSummary) {
       setFetchError(null);
       typeSummary(summary);
     }
   }, [summary]);
 
   useEffect(() => {
-    if (investmentAdvice && !typedAdvice) {
+    if (investmentAdvice && investmentAdvice !== typedAdvice) {
       typeAdvice(investmentAdvice);
     }
   }, [investmentAdvice]);
 
   useEffect(() => {
-    if (overallScore !== undefined && !typedScore) {
-      typeScore(`${overallScore}/10`); // Fixed syntax here
+    if (
+      overallScore !== undefined &&
+      overallScore !== null &&
+      overallScore !== lastScoreRef.current
+    ) {
+      lastScoreRef.current = overallScore;
+      typeScore(`${overallScore}/10`);
+    } else if (typedScore === "") {
+      setTypedScore(`${lastScoreRef.current || 0}/10`);
     }
   }, [overallScore]);
 
@@ -101,18 +115,18 @@ function Summary({ summary, overallScore, investmentAdvice, error, isLoading }) 
     <section className="summary-container">
       {isLoading ? (
         <div className="loading-indicator"> 
-          <svg viewBox="0 0 240 240" height="240" width="240" class="pl">
-            <circle stroke-linecap="round" stroke-dashoffset="-330" stroke-dasharray="0 660" stroke-width="20" stroke="#000" fill="none" r="105" cy="120" cx="120" class="pl__ring pl__ring--a"></circle>
-            <circle stroke-linecap="round" stroke-dashoffset="-110" stroke-dasharray="0 220" stroke-width="20" stroke="#000" fill="none" r="35" cy="120" cx="120" class="pl__ring pl__ring--b"></circle>
-            <circle stroke-linecap="round" stroke-dasharray="0 440" stroke-width="20" stroke="#000" fill="none" r="70" cy="120" cx="85" class="pl__ring pl__ring--c"></circle>
-            <circle stroke-linecap="round" stroke-dasharray="0 440" stroke-width="20" stroke="#000" fill="none" r="70" cy="120" cx="155" class="pl__ring pl__ring--d"></circle>
+          <svg viewBox="0 0 240 240" height="240" width="240" className="pl">
+            <circle strokeLinecap="round" strokeDashoffset="-330" strokeDasharray="0 660" strokeWidth="20" stroke="#000" fill="none" r="105" cy="120" cx="120" className="pl__ring pl__ring--a"></circle>
+            <circle strokeLinecap="round" strokeDashoffset="-110" strokeDasharray="0 220" strokeWidth="20" stroke="#000" fill="none" r="35" cy="120" cx="120" className="pl__ring pl__ring--b"></circle>
+            <circle strokeLinecap="round" strokeDasharray="0 440" strokeWidth="20" stroke="#000" fill="none" r="70" cy="120" cx="85" className="pl__ring pl__ring--c"></circle>
+            <circle strokeLinecap="round" strokeDasharray="0 440" strokeWidth="20" stroke="#000" fill="none" r="70" cy="120" cx="155" className="pl__ring pl__ring--d"></circle>
           </svg>
         </div>
       ) : error ? (
         <p className="error">{error}</p>
       ) : fetchError ? (
         <p className="error">{fetchError}</p>
-      ) : (
+      ) : (summary && investmentAdvice && overallScore !== undefined) ? (
         <div className="content-wrapper">
           <div className="text-content">
             <div className="news-summary">
@@ -150,6 +164,8 @@ function Summary({ summary, overallScore, investmentAdvice, error, isLoading }) 
             </div>
           </div>
         </div>
+      ) : (
+        <p className="error">Waiting for data...</p>
       )}
     </section>
   );
