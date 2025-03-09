@@ -17,18 +17,27 @@ app = Flask(__name__)
 CORS(app)
 
 logging.basicConfig(level=logging.DEBUG)
-'''
-# Supabase Configuration
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_SERVICE_ROLE_KEY = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
 
-'''
 SUPABASE_URL = "https://yazzyrvtglasvevlraut.supabase.co"
 SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlhenp5cnZ0Z2xhc3ZldmxyYXV0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg3ODE5NzgsImV4cCI6MjA1NDM1Nzk3OH0.NmZPqtJKzzsgORpQqbXwI6OCzCz_i6PBe0_YhwpywWU"
 SUPABASE_SERVICE_ROLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlhenp5cnZ0Z2xhc3ZldmxyYXV0Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczODc4MTk3OCwiZXhwIjoyMDU0MzU3OTc4fQ.EXnTpHqwk3lcr7BTtyXlyK0Ztzt2yk3AhZ9-y7N8Vn8"
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
+user_email=None
+user_email = None  # Global variable to store the email
 
+@app.route("/store-email", methods=["POST"])
+def store_email():
+    global user_email  # Use global variable
+    data = request.json  # Receive JSON data from frontend
+    email = data.get("email")  # Extract email from request
+    
+    if email:
+        user_email = email  # ✅ Store email globally
+        print(f"Received email from frontend: {user_email}")  # Debugging log
+        return jsonify({"message": "Email received", "email": user_email}), 200
+    else:
+        return jsonify({"error": "No email provided"}), 400
 
 @app.route('/api/news', methods=['POST'])
 def get_news():
@@ -75,6 +84,7 @@ def get_stock_data_endpoint(company_name):
         return jsonify({'error': str(e)}), 500    
 @app.route('/predict', methods=['POST'])
 def predict():
+    global user_email 
     try:
         data = request.get_json()
         ticker = data.get('ticker')
@@ -85,24 +95,8 @@ def predict():
        
         from datetime import datetime
 
-        # Fetch all users from Supabase Auth
-        user_data = supabase.auth.admin.list_users()
 
-        # Ensure we have users
-        if not user_data:
-            return jsonify({"error": "No logged-in user found"}), 401
-
-        # Sort users by last_sign_in_at (most recent first)
-        sorted_users = sorted(
-            user_data,
-            key=lambda u: u.last_sign_in_at if u.last_sign_in_at else datetime.min.replace(tzinfo=timezone.utc),  
-            reverse=True
-        )
-
-        # Get the latest signed-in user's email
-        user_email = sorted_users[0].email if sorted_users else "Unknown Email"
-
-        app.logger.info(f"✅ Last Signed-In User: {user_email}")
+        app.logger.info(f"✅ Using stored email for prediction: {user_email}")
 
 
 

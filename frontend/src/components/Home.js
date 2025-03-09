@@ -1,14 +1,44 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './Home.css';
-
+import supabase from "../supabaseClient";
 
 function Home({ company, setCompany, handleSearch }) {
   const [showSearch, setShowSearch] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [userEmail, setUserEmail] = useState(""); // ✨ Add userEmail state
   const inputRef = useRef(null);
   
+  useEffect(() => {
+    async function fetchUser() {
+      const { data, error } = await supabase.auth.getUser();
+      if (data?.user) {
+        setUserEmail(data.user.email);
+        sendEmailToBackend(data.user.email); // Send email to backend
+      }
+      if (error) {
+        console.error("Error fetching user:", error);
+      }
+    }
+    fetchUser();
+  }, []);
+
+  const sendEmailToBackend = async (email) => {
+    try {
+      const response = await fetch("http://localhost:5000/store-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+      const result = await response.json();
+      console.log("Response from backend:", result);
+    } catch (error) {
+      console.error("Error sending email to backend:", error);
+    }
+  };
   // Sample company data - replace with your actual data source
   const companyList = [
   "Reliance Industries Ltd",
@@ -346,7 +376,6 @@ function Home({ company, setCompany, handleSearch }) {
 }
 
 export default Home;
-
 
 
 
