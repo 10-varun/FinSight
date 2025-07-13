@@ -1,4 +1,9 @@
+# ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) ![Contributors](https://img.shields.io/github/contributors/your-username/your-repo) ![Issues](https://img.shields.io/github/issues/your-username/your-repo) ![Forks](https://img.shields.io/github/forks/your-username/your-repo) ![Stars](https://img.shields.io/github/stars/your-username/your-repo)
+
 # **FINSIGHT Documentation**
+
+> An intelligent stock market insights platform simplifying investment decisions with AI-driven recommendations and real-time data.
+
 
 ## **Introduction**
 FINSIGHT is an intelligent stock market insights platform designed to simplify the investment journey for both beginners and seasoned investors. The platform centralizes essential stock market data, financial news, and personalized recommendations, providing users with actionable insights to make informed decisions.
@@ -150,8 +155,29 @@ To create a user-friendly application that integrates historical stock data, rea
 
 ---
 
-## **Conclusion**
-FINSIGHT is designed to simplify stock market investments by leveraging AI, advanced analytics, and user-centric design. It empowers users to make data-driven decisions confidently and aims to redefine how investors interact with the stock market.
+## **Project Status**
+The project is currently in active development. Contributions and feedback are welcome!
+
+## **Roadmap**
+- Add support for additional global stock markets.
+- Improve AI recommendation models with reinforcement learning.
+- Develop mobile applications for iOS and Android.
+- Implement automated trade execution features.
+- Expand to cryptocurrency and forex markets.
+- Add multi-language support.
+
+## **FAQ**
+**Q:** How do I contribute to the project?  
+**A:** Please see the [CONTRIBUTING.md](CONTRIBUTING.md) file for detailed guidelines.
+
+**Q:** Where can I report issues?  
+**A:** Use the GitHub Issues tab to report bugs or request features.
+
+**Q:** Is there a code of conduct?  
+**A:** Yes, please see the [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) file.
+
+## **Screenshots / Demo**
+![Dashboard Screenshot](frontend/src/images/title.jpg)
 
 ## **Repository Information**
 
@@ -160,6 +186,14 @@ FINSIGHT is designed to simplify stock market investments by leveraging AI, adva
 2. Create a new branch for your feature or bug fix.
 3. Commit your changes and push them to your branch.
 4. Create a pull request detailing your contributions.
+
+For detailed contribution guidelines, please see the [CONTRIBUTING.md](CONTRIBUTING.md) file.
+
+### **Issue and Pull Request Templates**
+Please use the provided issue and pull request templates to help maintainers understand your contributions and issues.
+
+### **Code of Conduct**
+This project follows a [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you agree to abide by its terms.
 
 ### **Setup Instructions**
 1. Clone the repository: `git clone <repository-url>`
