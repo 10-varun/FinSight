@@ -1,9 +1,8 @@
-# ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) ![Contributors](https://img.shields.io/github/contributors/your-username/your-repo) ![Issues](https://img.shields.io/github/issues/your-username/your-repo) ![Forks](https://img.shields.io/github/forks/your-username/your-repo) ![Stars](https://img.shields.io/github/stars/your-username/your-repo)
+# ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) ![Contributors](https://img.shields.io/github/contributors/fahad10inb/Stock_prediction) ![Issues](https://img.shields.io/github/issues/fahad10inb/Stock_prediction) ![Forks](https://img.shields.io/github/forks/fahad10inb/Stock_prediction) ![Stars](https://img.shields.io/github/stars/fahad10inb/Stock_prediction)
 
 # **FINSIGHT Documentation**
 
 > An intelligent stock market insights platform simplifying investment decisions with AI-driven recommendations and real-time data.
-
 
 ## **Introduction**
 FINSIGHT is an intelligent stock market insights platform designed to simplify the investment journey for both beginners and seasoned investors. The platform centralizes essential stock market data, financial news, and personalized recommendations, providing users with actionable insights to make informed decisions.
@@ -101,7 +100,7 @@ To create a user-friendly application that integrates historical stock data, rea
 
 ### **5. Portfolio Management**
 - Tracks stock purchase price, current value, profit/loss, and percentage changes.
-  
+
 ### **6. Real-Time Alerts**
 - Provides notifications for major market shifts and investment opportunities based on AI-driven insights.
 
@@ -176,9 +175,6 @@ The project is currently in active development. Contributions and feedback are w
 **Q:** Is there a code of conduct?  
 **A:** Yes, please see the [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) file.
 
-## **Screenshots / Demo**
-![Dashboard Screenshot](frontend/src/images/title.jpg)
-
 ## **Repository Information**
 
 ### **How to Contribute**
@@ -196,7 +192,7 @@ Please use the provided issue and pull request templates to help maintainers und
 This project follows a [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you agree to abide by its terms.
 
 ### **Setup Instructions**
-1. Clone the repository: `git clone <repository-url>`
+1. Clone the repository: `git clone https://github.com/fahad10inb/Stock_prediction.git`
 2. Install dependencies:
    - Frontend: `npm install`
    - Backend: `pip install -r requirements.txt`
@@ -207,4 +203,4 @@ This project follows a [Code of Conduct](CODE_OF_CONDUCT.md). By participating, 
 ### **License**
 This project is licensed under the MIT License. See the `LICENSE` file for details.
 
-For any questions or contributions, please visit the [GitHub repository](#).
+For any questions or contributions, please visit the [GitHub repository](https://github.com/fahad10inb/Stock_prediction).
