@@ -7,7 +7,7 @@
 ## **Introduction**
 FINSIGHT is an intelligent stock market insights platform designed to simplify the investment journey for both beginners and seasoned investors. The platform centralizes essential stock market data, financial news, and personalized recommendations, providing users with actionable insights to make informed decisions.
 
----
+
 
 ## **Project Overview**
 
@@ -22,7 +22,7 @@ To create a user-friendly application that integrates historical stock data, rea
 5. Visual representation of stock trends, sentiment scores, and recommendation confidence.
 6. Real-time alerts for significant market fluctuations and investment opportunities.
 
----
+
 
 ## **System Architecture**
 
@@ -57,7 +57,7 @@ To create a user-friendly application that integrates historical stock data, rea
 - **Deployment**:
   - Hosted on Vercel with model training on Google Colab and Hugging Face Spaces.
 
----
+
 
 ## **Tech Stack**
 
@@ -79,7 +79,7 @@ To create a user-friendly application that integrates historical stock data, rea
 ### **Libraries and Tools**
 - SpaCy, SentenceTransformer, VADER, FinBERT, StandardScaler, Gemini, Hugging Face Transformers
 
----
+
 
 ## **Key Functionalities**
 
@@ -108,7 +108,7 @@ To create a user-friendly application that integrates historical stock data, rea
 - Interactive graphs for stock trends.
 - Sentiment dashboards for quick market sentiment overviews.
 
----
+
 
 ## **Development Workflow**
 
@@ -134,14 +134,137 @@ To create a user-friendly application that integrates historical stock data, rea
 - Create interactive dashboards and widgets with React.
 - Use Chart.js and D3.js for graph visualizations.
 
----
+
 
 ## **Deployment**
 - **Hosting**: Vercel for the web application.
 - **Model Training**: Google Colab, Hugging Face Spaces for scalable training.
 - **Version Control**: GitHub for code management and collaboration.
 
----
+
+
+## **API Documentation**
+
+### Overview
+The FINSIGHT API provides programmatic access to stock market data, financial news sentiment analysis, and AI-driven investment recommendations. This documentation covers the available endpoints, authentication, request/response formats, error handling, and usage examples.
+
+### Authentication
+- API uses Bearer Token authentication.
+- Include your API key in the `Authorization` header as:  
+  `Authorization: Bearer YOUR_API_KEY`
+- Obtain API keys by registering on the platform.
+
+### Base URL
+```
+https://api.finsight.com/v1
+```
+
+### Endpoints
+
+#### 1. Get Stock Data
+- **URL:** `/stocks/{symbol}`
+- **Method:** GET
+- **URL Params:**  
+  `symbol=[string]` (required) - Stock ticker symbol (e.g., "AAPL", "TCS.NS")
+- **Success Response:**  
+  - **Code:** 200  
+  - **Content:**  
+  ```json
+  {
+    "symbol": "AAPL",
+    "price": 150.25,
+    "change": -0.45,
+    "volume": 1200000,
+    "timestamp": "2024-06-01T12:00:00Z"
+  }
+  ```
+- **Error Response:**  
+  - **Code:** 404 NOT FOUND  
+  - **Content:** `{ "error": "Stock symbol not found" }`
+
+#### 2. Get News Sentiment
+- **URL:** `/news/sentiment`
+- **Method:** POST
+- **Body Params:**  
+  ```json
+  {
+    "symbols": ["AAPL", "GOOG"],
+    "date_range": {
+      "start": "2024-05-01",
+      "end": "2024-05-31"
+    }
+  }
+  ```
+- **Success Response:**  
+  - **Code:** 200  
+  - **Content:**  
+  ```json
+  {
+    "AAPL": { "positive": 0.6, "neutral": 0.3, "negative": 0.1 },
+    "GOOG": { "positive": 0.5, "neutral": 0.4, "negative": 0.1 }
+  }
+  ```
+- **Error Response:**  
+  - **Code:** 400 BAD REQUEST  
+  - **Content:** `{ "error": "Invalid request parameters" }`
+
+#### 3. Get Investment Recommendations
+- **URL:** `/recommendations/{user_id}`
+- **Method:** GET
+- **URL Params:**  
+  `user_id=[string]` (required) - Unique user identifier
+- **Success Response:**  
+  - **Code:** 200  
+  - **Content:**  
+  ```json
+  {
+    "user_id": "12345",
+    "recommendations": [
+      { "symbol": "AAPL", "action": "buy", "confidence": 0.85 },
+      { "symbol": "TSLA", "action": "hold", "confidence": 0.65 }
+    ]
+  }
+  ```
+- **Error Response:**  
+  - **Code:** 401 UNAUTHORIZED  
+  - **Content:** `{ "error": "Invalid or missing API key" }`
+
+### Error Handling
+- Standard HTTP status codes are used.
+- Error responses include an `error` field with a descriptive message.
+- Common codes: 400 (Bad Request), 401 (Unauthorized), 404 (Not Found), 500 (Internal Server Error).
+
+### Rate Limiting
+- API requests are limited to 1000 requests per minute per API key.
+- Exceeding the limit returns HTTP 429 Too Many Requests.
+
+### SDK / Code Examples
+
+#### Python Example
+```python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+headers = {"Authorization": f"Bearer {API_KEY}"}
+
+response = requests.get("https://api.finsight.com/v1/stocks/AAPL", headers=headers)
+if response.status_code == 200:
+    data = response.json()
+    print(f"Price of AAPL: {data['price']}")
+else:
+    print(f"Error: {response.json()['error']}")
+```
+
+#### cURL Example
+```bash
+curl -H "Authorization: Bearer YOUR_API_KEY" https://api.finsight.com/v1/stocks/AAPL
+```
+
+### Getting Started
+1. Register for an API key on the FINSIGHT platform.
+2. Review the API endpoints and authentication method.
+3. Use the provided SDK examples or your preferred HTTP client to integrate.
+4. Handle errors and respect rate limits in your application.
 
 ## **Future Enhancements**
 1. Integration with global stock markets (e.g., NYSE, NASDAQ, London Stock Exchange).
@@ -152,7 +275,6 @@ To create a user-friendly application that integrates historical stock data, rea
 6. Expansion to include cryptocurrency and forex market insights.
 7. Multi-language support for international investors.
 
----
 
 ## **Project Status**
 The project is currently in active development. Contributions and feedback are welcome!
